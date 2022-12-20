@@ -1,0 +1,36 @@
+service: js-node-ts-react-backend-service
+
+frameworkVersion: '3'
+
+provider:
+  iamRoleStatements:
+    - Action:
+        - lambda:InvokeAsync
+        - lambda:InvokeFunction
+      Effect: Allow
+      Resource: '*'
+  memorySize: 128
+  name: aws
+  region: eu-north-1
+  runtime: nodejs18.x
+  stage: dev
+  versionFunctions: false
+
+plugins:
+  - serverless-offline
+
+package:
+  excludeDevDependencies: true
+
+functions:
+  backend:
+    handler: handler.handler
+    events:
+      - httpApi: 'GET /hello'
+
+
+custom:
+    serverless-offline:
+        httpPort: 6600
+        websocketPort: 6601
+        lambdaPort: 6602
