@@ -13,18 +13,24 @@ importers:
       esbuild: ^0.16.10
       eslint: ^8.30.0
       express: ^4.17.1
+      fs: 0.0.1-security
       nodemon: ^2.0.20
+      papaparse: ^5.3.2
       serverless: ^3.25.1
       serverless-esbuild: ^1.34.0
       serverless-http: ^3.1.0
       serverless-offline: ^12.0.3
+      simple-node-logger: ^21.8.12
     dependencies:
       '@aws-sdk/client-lambda': 3.234.0
       '@serverless/utils': 6.8.2
       aws-sdk-mock: 5.8.0
       express: 4.18.2
+      fs: 0.0.1-security
       nodemon: 2.0.20
+      papaparse: 5.3.2
       serverless-http: 3.1.0
+      simple-node-logger: 21.8.12
     devDependencies:
       esbuild: 0.16.10
       eslint: 8.30.0
@@ -2881,6 +2887,10 @@ packages:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
     dev: true
 
+  /fs/0.0.1-security:
+    resolution: {integrity: sha512-3XY9e1pP0CVEUCdj5BmfIZxRBTSDycnbqhIOGec9QYtmVH2fbLpj86CFWkrNOkt/Fvty4KZG5lTglL9j/gJ87w==}
+    dev: false
+
   /fs2/0.3.9:
     resolution: {integrity: sha512-WsOqncODWRlkjwll+73bAxVW3JPChDgaPX3DT4iTTm73UmG4VgALa7LaFblP232/DN60itkOrPZ8kaP1feksGQ==}
     engines: {node: '>=6'}
@@ -3754,6 +3764,10 @@ packages:
     hasBin: true
     dev: true
 
+  /moment/2.29.4:
+    resolution: {integrity: sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==}
+    dev: false
+
   /ms/2.0.0:
     resolution: {integrity: sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==}
     dev: false
@@ -4071,6 +4085,10 @@ packages:
   /pako/1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
     dev: true
+
+  /papaparse/5.3.2:
+    resolution: {integrity: sha512-6dNZu0Ki+gyV0eBsFKJhYr+MdQYAzFUGlBMNj3GNrmHxmz1lfRa24CjFObPXtjcetlOv5Ad299MhIK0znp3afw==}
+    dev: false
 
   /parent-module/1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
@@ -4643,6 +4661,13 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /simple-node-logger/21.8.12:
+    resolution: {integrity: sha512-RPImnYDq3jdUjaTvYLghaF1n65Dd0LV8hdZtlT0X1NZBAkw+lx0ZJtFydcUyYKjg0Yxd27AW9IAIc3OLhTjBzA==}
+    dependencies:
+      lodash: 4.17.21
+      moment: 2.29.4
+    dev: false
 
   /simple-update-notifier/1.1.0:
     resolution: {integrity: sha512-VpsrsJSUcJEseSbMHkrsrAVSdvVS5I96Qo1QAQ4FxQ9wXFcB+pjj7FB7/us9+GcgfW4ziHtYMc1J0PLczb55mg==}
