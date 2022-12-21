@@ -30,6 +30,7 @@ There are several good templates for this kind of full-stack app. I used:
 
 - [react-vite-ts-boilerplate](https://github.com/choisohyun/react-vite-ts-boilerplate) for the frontend development.
 - [node-express-starter-2022](https://github.com/redcartel/node-express-starter-2022) for the backend development.
+- [serverless-esbuild](https://github.com/floydspace/serverless-esbuild) for the backend development using serverless-esbuild.
 - [aws-node-express-api](https://github.com/serverless/examples/tree/v3/aws-node-express-api) for the backend and serverless development.
 - [Serverless NodeJS Template](https://gitlab.com/garethm/serverless-nodejs-template) for how to do serverless local development.
 

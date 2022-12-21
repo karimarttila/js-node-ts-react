@@ -11,6 +11,7 @@ router.use((req, res, next) => {
   next()
 })
 
+// For debugging: http http://localhost:6600/hello
 router.get('/hello', (req, res) => {
   return res.status(200).json({
     message: "Hello Yeah!",

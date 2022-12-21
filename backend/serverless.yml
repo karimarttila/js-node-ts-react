@@ -17,6 +17,7 @@ provider:
   versionFunctions: false
 
 plugins:
+  - serverless-esbuild
   - serverless-offline
 
 package:
