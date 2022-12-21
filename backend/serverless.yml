@@ -28,9 +28,8 @@ functions:
     events:
       - httpApi: 'GET /hello'
 
-
 custom:
-    serverless-offline:
-        httpPort: 6600
-        websocketPort: 6601
-        lambdaPort: 6602
+  serverless-offline:
+    httpPort: 6600
+    websocketPort: 6601
+    lambdaPort: 6602

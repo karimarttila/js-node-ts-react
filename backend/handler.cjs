@@ -1,17 +1,17 @@
-const serverless = require("serverless-http");
-const express = require("express");
-const app = express();
+'use strict';
 
-app.get("/hello", (req, res, next) => {
-  return res.status(200).json({
-    message: "Hello!",
-  });
-});
+// See: https://www.serverless.com/plugins/serverless-http
+const serverlessFramework = import('serverless-http');
+const application = import('./app.js');
 
-app.use((req, res, next) => {
-  return res.status(404).json({
-    error: "Not Found",
-  });
-});
+const serverlessApp = async (event, context) => {
+  // For debugging:
+  //console.log("event: ", event);
+  //console.log("context: ", context);
+  const { default: serverless } = await serverlessFramework;
+  const { app } = await application;
+  const result = await serverless(app)(event, context);
+  return result;
+};
 
-module.exports.handler = serverless(app);
+module.exports.handler = serverlessApp;
