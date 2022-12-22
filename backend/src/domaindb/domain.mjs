@@ -1,8 +1,8 @@
-import fs from 'fs';
 import papaparse from 'papaparse';
 import logger from '../util/logger.mjs';
 
-const { readFileSync } = fs;
+const fs = require('fs').promises;
+
 const { parse } = papaparse;
 
 const productGroupsCsvFile = 'resources/product-groups.csv';
@@ -15,10 +15,10 @@ const domain = {};
  * Simulates the domain db, but actually just reads the CSV file.
  * @returns {object} product groups {<key>: <category>}
  */
-function getProductGroups() {
+async function getProductGroups() {
   logger.debug('ENTER domain.getProductGroups');
   if ((domain['product-groups'] === null) || (domain['product-groups'] === undefined)) {
-    const csvContents = readFileSync(productGroupsCsvFile, 'utf8');
+    const csvContents = await fs.readFile(productGroupsCsvFile, 'utf8');
     const rows = parse(csvContents, { delimiter: '\t' }).data;
     const ret = rows.reduce((acc, row) => {
       if (row.length === 2) {
