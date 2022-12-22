@@ -1,4 +1,7 @@
-import { createSimpleLogger } from 'simple-node-logger';
+import pkg from 'simple-node-logger';
+// Not working when using Node Run and Debug REPL.
+// import { createSimpleLogger } from 'simple-node-logger';
+const { createSimpleLogger } = pkg;
 
 const simpleNodeLoggerOpts = {
   logFilePath: 'logs/backend.log',

@@ -38,6 +38,35 @@ There are several good templates for this kind of full-stack app. I used:
 
 TODO
 
+## Backend Development
+
+You can use VSCode debugger with this `launch.json` configuration:
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch Program",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/backend/src/domaindb/domain.mjs"
+    }
+  ]
+}
+```
+
+Use `Run and Debug` (VSCode: left panel).
+Then `Run Javascript debug terminal` (VSCode upper left corner).
+Set a breakpoint in `domain.jms` file.
+Open terminal, `cd backend` and run e.g. `node src/domaindb/domain.mjs` => debugger stops in the breakpoint.
+
+This way you can debug an individual file using the VSCode debugger.
+
+
 ## Serverless Local Development
 
 This demo app uses instructions provided in the [Serverless local development](https://www.serverless.com/blog/serverless-local-development) blog post and the [Serverless Offline](https://www.serverless.com/plugins/serverless-offline) plugin.
