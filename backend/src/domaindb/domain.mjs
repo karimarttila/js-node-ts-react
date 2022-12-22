@@ -17,25 +17,20 @@ const domain = {};
  */
 function getProductGroups() {
   logger.debug('ENTER domain.getProductGroups');
-  let productGroups = domain['product-groups'];
-  if ((productGroups === null) || (productGroups === undefined)) {
+  if ((domain['product-groups'] === null) || (domain['product-groups'] === undefined)) {
     const csvContents = readFileSync(productGroupsCsvFile, 'utf8');
     const rows = parse(csvContents, { delimiter: '\t' }).data;
-    const obj = {};
-    rows.map((row) => {
+    const ret = rows.reduce((acc, row) => {
       if (row.length === 2) {
-        // logger.trace(`row: ${JSON.stringify(row)}`);
         const [key, val] = row;
-        obj[key] = val;
+        acc[key] = val;
       }
-      // Just for linter return dummy null, we are not interested of result of arrow function.
-      return null;
-    });
-    productGroups = obj;
-    domain['product-groups'] = productGroups;
+      return acc;
+    }, {});
+    domain['product-groups'] = ret;
   }
   logger.debug('EXIT domain.getProductGroups');
-  return productGroups;
+  return domain['product-groups'];
 }
 
 // For debugging using the node Run and Debug REPL.
