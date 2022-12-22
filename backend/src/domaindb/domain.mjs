@@ -36,9 +36,64 @@ async function getProductGroups() {
   return domain['product-groups'];
 }
 
+// Internal function to load the products to the domain db.
+async function loadProducts(pgId) {
+  logger.debug(`ENTER domain.loadProducts, pgId: ${pgId}`);
+  const productsKey = `pg-${pgId}-products`;
+  if ((domain[productsKey] === null) || (domain[productsKey] === undefined)) {
+    const productsCsvFile = `resources/pg-${pgId}-products.csv`;
+    const csvContents = await fs.readFile(productsCsvFile, 'utf8');
+    const rows = papaparse.parse(csvContents, { delimiter: '\t' }).data;
+    const ret = rows.reduce((acc, row) => {
+      if (row.length === 8) {
+        // logger.debug(`row: ${JSON.stringify(row)}`);
+        // Variable destructuring example.
+        const [myPId, myPgId, myTitle, myPrice, myAuthorOrDirector, myYear, myCountry,
+          myLanguageOrGenre] = row;
+        acc.push(
+          {
+            id: myPId,
+            pgId: myPgId,
+            title: myTitle,
+            price: myPrice,
+            authorOrDirector: myAuthorOrDirector,
+            year: myYear,
+            country: myCountry,
+            languageOrGenre: myLanguageOrGenre,
+          },
+        );
+      }
+      return acc;
+    }, []);
+    domain[productsKey] = ret;
+  }
+  logger.debug('EXIT domain.loadProducts');
+}
+
+/**
+ * Gets products for product group 'pgId'.
+ * @param {int} pgId - Product group id
+ * @returns {list} products
+ */
+async function getProducts(pgId) {
+  logger.debug(`ENTER domain.getProducts, pgId: ${pgId}`);
+  const productsKey = `pg-${pgId}-products`;
+  let products = domain[productsKey];
+  if ((products === null) || (products === undefined)) {
+    await loadProducts(pgId);
+    products = domain[productsKey];
+  }
+  logger.debug('EXIT domain.getProducts');
+  return products;
+}
+
 // For debugging using the node Run and Debug REPL.
 // const debugRet = await getProductGroups();
 // logger.debug('debugRet: ', debugRet);
+// await loadProducts(1);
+// logger.debug('domain:: ', domain);
+// const debugRet = await getProducts(2);
+// logger.debug('debugRet: ', debugRet);
 
-export { getProductGroups };
+export { getProductGroups, getProducts };
 // exports.getProductGroups = getProductGroups;

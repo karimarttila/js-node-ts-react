@@ -30,6 +30,9 @@ functions:
     events:
       - httpApi: 'GET /hello'
       - httpApi: 'GET /product-groups'
+      - httpApi:
+          path: /products/{pgId}
+          method: get
 
 custom:
   serverless-offline:

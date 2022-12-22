@@ -1,5 +1,5 @@
 import express from 'express';
-import { getProductGroups } from '../domaindb/domain.mjs';
+import { getProductGroups, getProducts } from '../domaindb/domain.mjs';
 
 const router = express.Router();
 
@@ -19,7 +19,13 @@ router.get('/hello', (req, res) => res.status(200).json({
 
 router.get('/product-groups', async (req, res) => {
   const productGroups = await getProductGroups();
-  const ret = { ret: 'ok', 'product-groups': productGroups };
+  const ret = { ret: 'ok', product_groups: productGroups };
+  res.status(200).json(ret);
+});
+
+router.get('/products/:pgId', async (req, res) => {
+  const buf = await getProducts(req.params.pgId);
+  const ret = { ret: 'ok', products: buf };
   res.status(200).json(ret);
 });
 
