@@ -23,7 +23,7 @@ plugins:
 package:
   excludeDevDependencies: true
 
-// NOTE: handler.default since we have export default handler in handler.js.
+# NOTE: handler.default since we have export default handler in handler.js.
 functions:
   backend:
     handler: index.default
