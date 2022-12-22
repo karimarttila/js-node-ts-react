@@ -4,7 +4,8 @@
   "description": "Javascript-Node (backend) / Typescript-React (frontend) demonstration app.",
   "main": "index.js",
   "scripts": {
-    "dev": "pnpm --filter \"./backend\" --filter \"./frontend\" dev"
+    "dev": "pnpm --filter \"./backend\" --filter \"./frontend\" dev",
+    "lint": "eslint --ext .js --ignore-path .gitignore ."
   },
   "keywords": [
     "javascript",

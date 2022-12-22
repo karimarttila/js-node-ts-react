@@ -1,6 +1,6 @@
-const papaparse = import('papaparse');
-const fs = import('fs');
+// import logger from './src/util/logger';
 
-import { logger } from './src/util/logger.js';
+// const papaparse = import('papaparse');
+// const fs = import('fs');
 
-const productGroupsCsvFile = 'resources/product-groups.csv';
+// const productGroupsCsvFile = 'resources/product-groups.csv';

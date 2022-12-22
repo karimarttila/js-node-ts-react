@@ -1,4 +1,4 @@
-import { createSimpleLogger} from 'simple-node-logger';
+import { createSimpleLogger } from 'simple-node-logger';
 
 const simpleNodeLoggerOpts = {
   logFilePath: 'logs/backend.log',
@@ -8,6 +8,7 @@ const simpleNodeLoggerOpts = {
 const logLevel = process.env.LOG_LEVEL || 'debug';
 
 function initLogger() {
+  // eslint-disable-next-line
   console.log(`simpleNodeLoggerOpts ${JSON.stringify(simpleNodeLoggerOpts)}`);
   const myLogger = createSimpleLogger(simpleNodeLoggerOpts);
   myLogger.setLevel(logLevel);
@@ -17,4 +18,4 @@ function initLogger() {
 
 const logger = initLogger();
 
-export { logger };
+export default logger;

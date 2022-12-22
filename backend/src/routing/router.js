@@ -8,14 +8,12 @@ router.use((req, res, next) => {
   // console.log(req);
   // console.log('********** RESPONSE ***********');
   // console.log(res);
-  next()
-})
+  next();
+});
 
 // For debugging: http http://localhost:6600/hello
-router.get('/hello', (req, res) => {
-  return res.status(200).json({
-    message: "Hello Yeah!",
-  });
-})
+router.get('/hello', (req, res) => res.status(200).json({
+  message: 'Hello Yeah!',
+}));
 
-export { router };
+export default router;

@@ -23,9 +23,10 @@ plugins:
 package:
   excludeDevDependencies: true
 
+// NOTE: handler.default since we have export default handler in handler.js.
 functions:
   backend:
-    handler: handler.handler
+    handler: handler.default
     events:
       - httpApi: 'GET /hello'
 

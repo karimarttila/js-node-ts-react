@@ -1,9 +1,8 @@
 import express from 'express';
-import { router } from './src/routing/router.js';
+import router from './src/routing/router';
 
-const app = express();
+const application = express();
 
-app.use(router);
+application.use(router);
 
-export { app };
-
+export default application;
