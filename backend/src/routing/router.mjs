@@ -17,8 +17,8 @@ router.get('/hello', (req, res) => res.status(200).json({
   message: 'Hello Yeah!',
 }));
 
-router.get('/product-groups', (req, res) => {
-  const productGroups = getProductGroups();
+router.get('/product-groups', async (req, res) => {
+  const productGroups = await getProductGroups();
   const ret = { ret: 'ok', 'product-groups': productGroups };
   res.status(200).json(ret);
 });

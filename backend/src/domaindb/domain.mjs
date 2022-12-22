@@ -1,7 +1,10 @@
 import papaparse from 'papaparse';
+import pkg from 'fs';
 import logger from '../util/logger.mjs';
 
-const fs = require('fs').promises;
+const { promises: fs } = pkg;
+// NOTE: This is not working when using Node Run and Debug REPL.
+// const fs = require('fs').promises;
 
 const { parse } = papaparse;
 
@@ -34,8 +37,8 @@ async function getProductGroups() {
 }
 
 // For debugging using the node Run and Debug REPL.
-// const ret = getProductGroups();
-// logger.debug('ret: ', ret);
+// const debugRet = await getProductGroups();
+// logger.debug('debugRet: ', debugRet);
 
 export { getProductGroups };
 // exports.getProductGroups = getProductGroups;
