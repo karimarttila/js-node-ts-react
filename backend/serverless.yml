@@ -26,9 +26,10 @@ package:
 // NOTE: handler.default since we have export default handler in handler.js.
 functions:
   backend:
-    handler: handler.default
+    handler: index.default
     events:
       - httpApi: 'GET /hello'
+      - httpApi: 'GET /product-groups'
 
 custom:
   serverless-offline:

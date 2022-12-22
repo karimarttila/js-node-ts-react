@@ -1,4 +1,5 @@
 import express from 'express';
+import { getProductGroups } from '../domaindb/domain.mjs';
 
 const router = express.Router();
 
@@ -15,5 +16,11 @@ router.use((req, res, next) => {
 router.get('/hello', (req, res) => res.status(200).json({
   message: 'Hello Yeah!',
 }));
+
+router.get('/product-groups', (req, res) => {
+  const productGroups = getProductGroups();
+  const ret = { ret: 'ok', 'product-groups': productGroups };
+  res.status(200).json(ret);
+});
 
 export default router;

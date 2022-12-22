@@ -1,5 +1,5 @@
-import application from './app';
-import logger from './src/util/logger';
+import application from './app.mjs';
+import logger from './src/util/logger.mjs';
 
 const serverlessFramework = import('serverless-http');
 

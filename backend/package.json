@@ -3,6 +3,7 @@
   "version": "0.1",
   "description": "js-node-ts-react app - backend",
   "main": "index.js",
+
   "scripts": {
     "dev": "nodemon --exec serverless offline start",
     "format": "eslint . --fix",
