@@ -8,6 +8,8 @@ In this repository, I have implemented the same webstore demo application that I
 
 Special thanks to [Thomas De Bluts](https://www.linkedin.com/in/thomas-de-bluts-296a74131/) for all the help while learning these technologies!
 
+Also special thanks to all of those in [koodiklinikka](https://koodiklinikka.fi/) slack, in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support!
+
 ## Quick Installation Guide
 
 TODO
