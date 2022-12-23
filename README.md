@@ -8,7 +8,7 @@ In this repository, I have implemented the same webstore demo application that I
 
 Thanks to [Thomas De Bluts](https://www.linkedin.com/in/thomas-de-bluts-296a74131/) for all the help while learning these technologies!
 
-Also thanks to all of those in [koodiklinikka](https://koodiklinikka.fi/) slack, in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support! Especially I'd like to name [Aarni Koskela](https://github.com/akx) and [Pete Nykänen](https://github.com/petetnt) - I got their permission to mention their names in the Koodiklinikka slack.
+Also thanks to all of those in [koodiklinikka](https://koodiklinikka.fi/) slack, in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support! Especially I'd like to name [Aarni Koskela](https://github.com/akx), [Pete Nykänen](https://github.com/petetnt), [Jussi Kinnula]( https://github.com/jussikinnula), and [Juha Pekkarinen](https://github.com/sirjuan) - I got their permission to mention their names in the Koodiklinikka slack.
 
 ## Quick Installation Guide
 
