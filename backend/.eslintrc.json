@@ -1,4 +1,5 @@
 {
+  "plugins": ["no-floating-promise"],
   "env": {
       "browser": true,
       "es2021": true
@@ -11,6 +12,7 @@
       "sourceType": "module"
   },
   "rules": {
+    "no-floating-promise/no-floating-promise": 2,
     "import/extensions": [
       "error",
       "ignorePackages",

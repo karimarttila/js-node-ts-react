@@ -15,6 +15,7 @@ importers:
       eslint-config-airbnb-base: ^15.0.0
       eslint-config-google: ^0.14.0
       eslint-plugin-import: ^2.25.2
+      eslint-plugin-no-floating-promise: ^1.0.2
       express: ^4.17.1
       fs: 0.0.1-security
       nodemon: ^2.0.20
@@ -40,6 +41,7 @@ importers:
       eslint-config-airbnb-base: 15.0.0_2lbwmhbr7bncddqbzzpg77o75m
       eslint-config-google: 0.14.0_eslint@8.30.0
       eslint-plugin-import: 2.26.0_eslint@8.30.0
+      eslint-plugin-no-floating-promise: 1.0.2
       serverless: 3.25.1
       serverless-esbuild: 1.34.0_esbuild@0.16.10
       serverless-offline: 12.0.3_serverless@3.25.1
@@ -2558,6 +2560,13 @@ packages:
       - supports-color
     dev: true
 
+  /eslint-plugin-no-floating-promise/1.0.2:
+    resolution: {integrity: sha512-ccbyIlvDuKJOrwypw9NWn6CIxTK+/CYARhsqMyP6cXYgIFcNFs01sGXOqq8XzOJFw02Umkj6hCnffaV6nSiqyw==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      requireindex: 1.2.0
+    dev: true
+
   /eslint-scope/7.1.1:
     resolution: {integrity: sha512-QKQM/UXpIiHcLqJ5AOyIW7XZmzjkzQXYE54n1++wb0u9V/abW3l9uQnxX8Z5Xd18xyKIMTUAyQ0k1e8pz6LUrw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
@@ -4521,6 +4530,11 @@ packages:
   /require-from-string/2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
+    dev: true
+
+  /requireindex/1.2.0:
+    resolution: {integrity: sha512-L9jEkOi3ASd9PYit2cwRfyppc9NoABujTP8/5gFcbERmo5jUoAKovIC3fsF17pkTnGsrByysqX+Kxd2OTNI1ww==}
+    engines: {node: '>=0.10.5'}
     dev: true
 
   /resolve-alpn/1.2.1:

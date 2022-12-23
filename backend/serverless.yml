@@ -33,6 +33,9 @@ functions:
       - httpApi:
           path: /products/{pgId}
           method: get
+      - httpApi:
+          path: /product/{pgId}/{pId}
+          method: get
 
 custom:
   serverless-offline:

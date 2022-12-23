@@ -87,6 +87,25 @@ async function getProducts(pgId) {
   return products;
 }
 
+/**
+ * Gets a product for product group 'pgId' and product id 'pId'.
+ * @param {int} pgId - Product group id
+ * @param {int} pId - Product id
+ */
+async function getProduct(pgId, pId) {
+  logger.debug(`ENTER domain.getProduct, pgId: ${pgId}, pId: ${pId}`);
+  const productsKey = `pg-${pgId}-products`;
+  let products = domain[productsKey];
+  if ((products === null) || (products === undefined)) {
+    await loadProducts(pgId);
+    products = domain[productsKey];
+  }
+  const filtered = products.filter((row) => row.id === `${pId}` && row.pgId === `${pgId}`);
+  const product = filtered[0];
+  logger.debug('EXIT domain.getProduct');
+  return product;
+}
+
 // For debugging using the node Run and Debug REPL.
 // const debugRet = await getProductGroups();
 // logger.debug('debugRet: ', debugRet);
@@ -94,6 +113,8 @@ async function getProducts(pgId) {
 // logger.debug('domain:: ', domain);
 // const debugRet = await getProducts(2);
 // logger.debug('debugRet: ', debugRet);
+// const debugRet = await getProduct(2, 49);
+// logger.debug('debugRet: ', debugRet);
 
-export { getProductGroups, getProducts };
+export { getProductGroups, getProducts, getProduct };
 // exports.getProductGroups = getProductGroups;
