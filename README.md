@@ -6,9 +6,9 @@ I created this Javascript-Node (backend) / Typescript-React (frontend) demonstra
 
 In this repository, I have implemented the same webstore demo application that I previously implemented as a Clojure full-stack app, described in my blog post: [Clojure Re-Frame Exercise](https://www.karimarttila.fi/clojure/2020/10/15/clojure-re-frame-exercise.html), but this time using Javascript and Typescript.
 
-Special thanks to [Thomas De Bluts](https://www.linkedin.com/in/thomas-de-bluts-296a74131/) for all the help while learning these technologies!
+Thanks to [Thomas De Bluts](https://www.linkedin.com/in/thomas-de-bluts-296a74131/) for all the help while learning these technologies!
 
-Also special thanks to all of those in [koodiklinikka](https://koodiklinikka.fi/) slack, in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support!
+Also thanks to all of those in [koodiklinikka](https://koodiklinikka.fi/) slack, in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support! Especially I'd like to name [Aarni Koskela](https://github.com/akx) and [Pete Nykänen](https://github.com/petetnt) - I got their permission to mention their names in the Koodiklinikka slack.
 
 ## Quick Installation Guide
 
