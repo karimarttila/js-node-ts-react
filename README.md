@@ -155,7 +155,7 @@ async function getProducts(pgId) {
 
 ### Functional Programming
 
-Functional programming is quite nice with Javascript. If you have been programming e.g. [Clojure]() you have no issues using map/reduce/filter with Javascript. Example:
+Functional programming is quite nice with Javascript. If you have been programming e.g. [Clojure](https://clojure.org/) you have no issues using map/reduce/filter with Javascript. Example:
 
 ```Javascript
     const ret = rows.reduce((acc, row) => {
@@ -184,9 +184,14 @@ npx degit akx/vite-react-ts-template
 
 ### Tailwind
 
-npx tailwindcss init
-TODO
+See instructions in [Get started with Tailwind CSS](https://tailwindcss.com/docs/installation):
 
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+Then I followed: [Install Tailwind CSS with Vite](https://tailwindcss.com/docs/guides/vite).
 
 ## Serverless Local Development
 

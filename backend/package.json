@@ -1,6 +1,6 @@
 {
   "name": "js-node-ts-react-backend",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "js-node-ts-react app - backend",
   "main": "index.js",
   "scripts": {
