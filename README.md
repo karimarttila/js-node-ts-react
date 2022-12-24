@@ -8,7 +8,7 @@ In this repository, I have implemented the same webstore demo application that I
 
 Thanks to [Thomas De Bluts](https://www.linkedin.com/in/thomas-de-bluts-296a74131/) for all the help while learning these technologies!
 
-Also thanks to all of those in [koodiklinikka](https://koodiklinikka.fi/) slack, in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support! Especially I'd like to name [Aarni Koskela](https://github.com/akx), [Pete Nykänen](https://github.com/petetnt), [Jussi Kinnula]( https://github.com/jussikinnula), [Juha Pekkarinen](https://github.com/sirjuan), and [Toni Parviainen](https://www.linkedin.com/in/toniparviainen/) - I got their permission to mention their names in the Koodiklinikka slack.
+Also thanks to all of those in [Koodiklinikka Slack](https://koodiklinikka.fi/), in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support! Especially I'd like to name [Aarni Koskela](https://github.com/akx), [Pete Nykänen](https://github.com/petetnt), [Jussi Kinnula]( https://github.com/jussikinnula), [Juha Pekkarinen](https://github.com/sirjuan), and [Toni Parviainen](https://www.linkedin.com/in/toniparviainen/) - I got their permission to mention their names in the Koodiklinikka slack. If you are a Finnish developer, I really recommend using the excellent Koodiklinikka Slack if you want to learn new programming languages or technologies - there are a lot of competent experts in the Koodiklinikka Slack willing to help each other.
 
 ## Quick Installation Guide
 
