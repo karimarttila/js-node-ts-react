@@ -1,13 +1,10 @@
 import React from "react";
+import Header from "./header";
 
 const landing = (
   <div className="App">
     <div>
-      <div className="bg-gray-200 p-4">
-        <h1 className="text-3xl text-center font-bold">
-          Welcome to the Demo Webstore!
-        </h1>
-      </div>
+      <Header />
       <div className="p-4">
         <p className="text-left p-4">
           This is a demo webstore built for learning the following technologies:

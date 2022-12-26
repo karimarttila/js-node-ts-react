@@ -186,6 +186,10 @@ Javascript is a quite nice functional programming language. I especially like th
 
 ## Frontend
 
+The frontend is a simple [React](https://reactjs.org/) application written using [Typescript](https://www.typescriptlang.org/). I use [Vite](https://vitejs.dev/) frontend development (bundling etc.). As a CSS utility library, I use [Tailwind](https://tailwindcss.com/). I also use a couple of other libraries, e.g. [Redux](https://redux.js.org/) for state management, and [React Router](https://reactrouter.com/en/main) as a frontend routing library.
+
+## Frontend Development
+
 ### Starter
 
 I used [akx/vite-react-ts-template](https://github.com/akx/vite-react-ts-template) for the frontend development. This template seemed to be a bit simpler than the other frontend starter project I listed above in chapter [Starter templates](#starter-templates). Install it using:
@@ -193,6 +197,18 @@ I used [akx/vite-react-ts-template](https://github.com/akx/vite-react-ts-templat
 ```bash
 npx degit akx/vite-react-ts-template
 ```
+
+### React
+
+I have used React previously with [Clojurescript](https://clojurescript.org/) / [Reagent](https://reagent-project.github.io/) - so I'm not a complete newbie with React.
+
+But I had never used React with Javascript / Typescript. Therefore, before implementing this exercise, I read the excellent new beta [React Docs](https://beta.reactjs.org/). I strongly recommend browsing through that documentation and doing the exercises - the documentation and exercises create a strong mental model for you to understand React better.
+
+### React Router
+
+Since I use React, using [React Router](https://reactrouter.com/en/main) as a frontend routing library is natural.
+
+Before implementing my own routing for this demo application, I did the excellent [React Routing Tutorial](https://reactrouter.com/en/main/start/tutorial).
 
 
 ### Tailwind
