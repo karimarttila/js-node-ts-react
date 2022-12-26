@@ -24,6 +24,7 @@ Here is a short description of the technologies used in this demonstration appli
 - [React](https://reactjs.org/) is a popular JavaScript library for building user interfaces for the browser.
 - [Redux](https://redux.js.org/) is a popular state management library for Javascript Applications.
 - [Vite](https://vitejs.dev/) is a tool for frontend development (e.g. hot reloading for the browser).
+- [Tailwind](https://tailwindcss.com/) is a popular CSS utility library.
 - [Serverless Framework](https://www.serverless.com/) for running the server in local development and deploying to AWS.
 
 ## Starter templates
@@ -84,6 +85,16 @@ You can use VSCode debugger with this `launch.json` configuration:
   ]
 }
 ```
+
+At the end of your Javascript file under debugging add code to call the function you want to debug, example:
+
+```Javascript
+// For debugging using the node Run and Debug REPL.
+const debugRet = await getProductGroups();
+logger.debug('debugRet: ', debugRet);
+```
+
+Then in VSCode:
 
 Use `Run and Debug` (VSCode: left panel).
 Then `Run Javascript debug terminal` (VSCode upper left corner).
@@ -171,7 +182,7 @@ Functional programming is quite nice with Javascript. If you have been programmi
 
 ### Javascript Programming Experience
 
-Javascript is a quite nice functional programming language. I especially like the functional features and literal data structures. The asynchronous nature of Javascript (just one thread) is a bit eccentric. What I miss is a good [REPL-driven development](https://clojure.org/guides/repl/introduction) DX as you have with [Clojure](https://clojure.org/) - not possible since Javascript is not a [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) (not a [homoiconic language](https://en.wikipedia.org/wiki/Homoiconicity)) - a real REPL is not just possible with Javascript).
+Javascript is a quite nice functional programming language. I especially like the functional features and literal data structures. The asynchronous nature of Javascript (just one thread) is a bit eccentric. What I miss is a good [REPL-driven development](https://clojure.org/guides/repl/introduction) DX as you have with [Clojure](https://clojure.org/) - not possible since Javascript is not a [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) (not a [homoiconic language](https://en.wikipedia.org/wiki/Homoiconicity)) - a real REPL is not just possible with Javascript.
 
 ## Frontend
 
