@@ -1,8 +1,9 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Index from "./routes/index";
+import ProductGroups from "./routes/product_groups";
 import "./index.css";
-import App from "./App";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement!); // eslint-disable-line
@@ -10,7 +11,11 @@ const root = createRoot(rootElement!); // eslint-disable-line
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Index />,
+  },
+  {
+    path: "product-groups",
+    element: <ProductGroups />,
   },
 ]);
 
