@@ -23,13 +23,18 @@ async function getProductGroups() {
   if ((domain['product-groups'] === null) || (domain['product-groups'] === undefined)) {
     const csvContents = await fs.readFile(productGroupsCsvFile, 'utf8');
     const rows = parse(csvContents, { delimiter: '\t' }).data;
-    const ret = rows.reduce((acc, row) => {
-      if (row.length === 2) {
-        const [key, val] = row;
-        acc[key] = val;
-      }
-      return acc;
-    }, {});
+    const ret = rows
+      .map((row) => {
+        if (row.length === 2) {
+          const [key, val] = row;
+          return {
+            pgId: key,
+            name: val,
+          };
+        }
+        return null;
+      })
+      .filter((element) => element !== null);
     domain['product-groups'] = ret;
   }
   logger.debug('EXIT domain.getProductGroups');
