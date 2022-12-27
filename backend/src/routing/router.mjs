@@ -24,13 +24,13 @@ router.get('/product-groups', async (req, res) => {
 });
 
 router.get('/products/:pgId', async (req, res) => {
-  const buf = await getProducts(req.params.pgId);
+  const buf = await getProducts(parseInt(req.params.pgId, 10));
   const ret = { ret: 'ok', products: buf };
   res.status(200).json(ret);
 });
 
 router.get('/product/:pgId/:pId', async (req, res) => {
-  const buf = await getProduct(req.params.pgId, req.params.pId);
+  const buf = await getProduct(parseInt(req.params.pgId, 10), parseInt(req.params.pId, 10));
   const ret = { ret: 'ok', product: buf };
   res.status(200).json(ret);
 });

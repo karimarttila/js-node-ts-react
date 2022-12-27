@@ -28,7 +28,7 @@ async function getProductGroups() {
         if (row.length === 2) {
           const [key, val] = row;
           return {
-            pgId: key,
+            pgId: parseInt(key, 10),
             name: val,
           };
         }
@@ -57,8 +57,8 @@ async function loadProducts(pgId) {
           myLanguageOrGenre] = row;
         acc.push(
           {
-            id: myPId,
-            pgId: myPgId,
+            pId: parseInt(myPId, 10),
+            pgId: parseInt(myPgId, 10),
             title: myTitle,
             price: myPrice,
             authorOrDirector: myAuthorOrDirector,
@@ -105,8 +105,9 @@ async function getProduct(pgId, pId) {
     await loadProducts(pgId);
     products = domain[productsKey];
   }
-  const filtered = products.filter((row) => row.id === `${pId}` && row.pgId === `${pgId}`);
+  const filtered = products.filter((row) => row.pId === pId && row.pgId === pgId);
   const product = filtered[0];
+  // logger.debug(`product: ${JSON.stringify(product)}`);
   logger.debug('EXIT domain.getProduct');
   return product;
 }
