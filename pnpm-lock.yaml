@@ -48,6 +48,7 @@ importers:
 
   frontend:
     specifiers:
+      '@tanstack/react-table': ^8.7.4
       '@types/react': ^18.0.26
       '@types/react-dom': ^18.0.9
       '@types/react-table': ^7.7.13
@@ -65,17 +66,16 @@ importers:
       react: ^18.2.0
       react-dom: ^18.2.0
       react-router-dom: ^6.6.1
-      react-table: ^7.8.0
       swr: ^2.0.0
       tailwindcss: ^3.2.4
       typescript: ^4.9.4
       vite: ^4.0.0
     dependencies:
+      '@tanstack/react-table': 8.7.4_biqbaboplfbrettd7655fr4n2y
       axios: 1.2.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-router-dom: 6.6.1_biqbaboplfbrettd7655fr4n2y
-      react-table: 7.8.0_react@18.2.0
       swr: 2.0.0_react@18.2.0
     devDependencies:
       '@types/react': 18.0.26
@@ -1533,6 +1533,23 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       defer-to-connect: 2.0.1
+
+  /@tanstack/react-table/8.7.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-4Q1OV3kUSxbtekclS3sqjCyCDowqCPruUCfHm1nGoPSmVLRCHoQ1E2rmzTVGeocEKgV9TDnj39tOgGwcADPuPA==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@tanstack/table-core': 8.7.4
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/table-core/8.7.4:
+    resolution: {integrity: sha512-OPhzca7e83KGukxLpZ+4F9OBp9CZXi9b/OGJBH8dlC3wpffcSSDczYGUGJKG7wirXQ6cUVYL+9G6UrrdnblKNQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /@tokenizer/token/0.3.0:
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
@@ -5162,14 +5179,6 @@ packages:
       react: '>=16.8'
     dependencies:
       '@remix-run/router': 1.2.1
-      react: 18.2.0
-    dev: false
-
-  /react-table/7.8.0_react@18.2.0:
-    resolution: {integrity: sha512-hNaz4ygkZO4bESeFfnfOft73iBUj8K5oKi1EcSHPAibEydfsX2MyU6Z8KCr3mv3C9Kqqh71U+DhZkFvibbnPbA==}
-    peerDependencies:
-      react: ^16.8.3 || ^17.0.0-0 || ^18.0.0
-    dependencies:
       react: 18.2.0
     dev: false
 

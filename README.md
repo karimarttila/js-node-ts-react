@@ -8,7 +8,7 @@ In this repository, I have implemented the same webstore demo application that I
 
 Thanks to [Thomas De Bluts](https://www.linkedin.com/in/thomas-de-bluts-296a74131/) for all the help while learning these technologies!
 
-Also thanks to all of those in [Koodiklinikka Slack](https://koodiklinikka.fi/), in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support! Especially I'd like to name [Aarni Koskela](https://github.com/akx), [Pete Nykänen](https://github.com/petetnt), [Jussi Kinnula]( https://github.com/jussikinnula), [Juha Pekkarinen](https://github.com/sirjuan), and [Toni Parviainen](https://www.linkedin.com/in/toniparviainen/) - I got their permission to mention their names in the Koodiklinikka slack. If you are a Finnish developer, I really recommend using the excellent Koodiklinikka Slack if you want to learn new programming languages or technologies - there are a lot of competent experts in the Koodiklinikka Slack willing to help each other.
+Also thanks to all of those in [Koodiklinikka Slack](https://koodiklinikka.fi/), in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support! Especially I'd like to name [Aarni Koskela](https://github.com/akx), [Pete Nykänen](https://github.com/petetnt), [Jussi Kinnula]( https://github.com/jussikinnula), [Juha Pekkarinen](https://github.com/sirjuan), [Toni Parviainen](https://www.linkedin.com/in/toniparviainen/), and [Kalle Ranki](https://www.linkedin.com/in/kalle-ranki/) - I got their permission to mention their names in the Koodiklinikka slack. If you are a Finnish developer, I really recommend using the excellent Koodiklinikka Slack if you want to learn new programming languages or technologies - there are a lot of competent experts in the Koodiklinikka Slack willing to help each other.
 
 ## Quick Installation Guide
 
@@ -210,6 +210,22 @@ Since I use React, using [React Router](https://reactrouter.com/en/main) as a fr
 
 Before implementing my own routing for this demo application, I did the excellent [React Routing Tutorial](https://reactrouter.com/en/main/start/tutorial).
 
+TODO: Kerro tässä evoluutio: 
+- Ensin Axios ja oma state.
+- Sitten swr
+- Sitten siirretty loaderiin
+- (ks. git historysta: product_groups.tsx)
+
+
+### Typescript
+
+Typescript selvästi auttoi funktioiden parametrien tyypityksessä yms. Selvästikin olisi kannattanut tehdä myös backend Typescriptilla (mutta halusin tehdä Javascriptilla koska alkavassa projektissa käytetään sitä).
+
+### Vite
+
+Live reload yms.
+
+
 
 ### Tailwind
 
@@ -221,6 +237,35 @@ npx tailwindcss init -p
 ```
 
 Then I followed: [Install Tailwind CSS with Vite](https://tailwindcss.com/docs/guides/vite).
+
+
+### JSX vs Hiccup
+
+TODO: vertaa JSX Clojurescript Hiccup.
+
+### Asynchronous Programming Model
+
+TODO:
+
+```Typescript
+export default function ProductGroups() {
+  const productGroupsSWR = useSWR(url, fetchJSON);
+  const productGroups = productGroupsSWR.data?.product_groups;
+...
+          <ProductGroupsTable productGroups={productGroups} />
+...
+```
+
+... ja sitten ihmettelin, miksi siellä ProductGroupsTable :ssa homma räjähtää datan käsittelyssä.
+Eli tuota komponenttia saa kutsua vain kun dataa on, eli:
+
+```Typescript
+          {productGroups && (
+            <ProductGroupsTable productGroups={productGroups} />
+          )}
+```
+
+Tässäkin console.log on Javascript koodarin ystävä.
 
 ## Serverless Local Development
 
