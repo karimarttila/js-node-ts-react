@@ -79,6 +79,10 @@ function ProductGroupsTable({
   );
 }
 
+interface ProductGroupsResponse {
+  product_groups: ProductGroupType[];
+}
+
 // TODO convert using react-router loader pattern instead.
 
 async function fetchJSON(url: string) {
@@ -89,7 +93,7 @@ async function fetchJSON(url: string) {
 }
 
 export default function ProductGroups() {
-  const productGroupsSWR = useSWR(url, fetchJSON);
+  const productGroupsSWR = useSWR<ProductGroupsResponse>(url, fetchJSON);
   const productGroups = productGroupsSWR.data?.product_groups;
 
   return (
