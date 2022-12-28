@@ -2,8 +2,10 @@ import React from "react";
 import Header from "../header";
 import axios from "axios";
 import { hostName, port } from "../utils/util";
+import ReactTable from "react-table";
+import useSWR from "swr";
 
-const baseURL = `http://${hostName}:${port}/product-groups`;
+const url = `http://${hostName}:${port}/product-groups`;
 
 type ProductGroupType = {
   pgId: number;
@@ -23,22 +25,18 @@ function ProductGroupsTable({
   );
 }
 
-export default function ProductGroups() {
-  const [productGroups, setProductGroups] = React.useState(null);
+// TODO convert using react-router loader pattern instead.
 
-  React.useEffect(() => {
-    axios
-      .get(baseURL)
-      .then((response) => {
-        console.log("response", response);
-        console.log("product_groups", response.data.product_groups);
-        if (response.status === 200 && response.data.ret === "ok")
-          setProductGroups(response.data.product_groups);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  }, []);
+async function fetchJSON(url: string) {
+  const response = await axios.get(url);
+  if (response.status === 200 && response.data.ret === "ok")
+    return response.data;
+  throw new Error(response.data.msg);
+}
+
+export default function ProductGroups() {
+  const productGroupsSWR = useSWR(url, fetchJSON);
+  const productGroups = productGroupsSWR.data?.product_groups;
 
   return (
     <div className="App">
