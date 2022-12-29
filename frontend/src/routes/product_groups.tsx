@@ -1,21 +1,13 @@
 import React from "react";
 import Header from "../header";
-import { hostName, port, fetchJSON } from "../utils/util";
+import { productGroupsUrl, fetchJSON, ProductGroupType, ProductGroupsResponse } from "../utils/util";
 import useSWR from "swr";
-
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
-const url = `http://${hostName}:${port}/product-groups`;
-
-type ProductGroupType = {
-  pgId: number;
-  name: string;
-};
 
 const pgColumnHelper = createColumnHelper<ProductGroupType>();
 
@@ -37,6 +29,8 @@ function ProductGroupsTable({
 }: {
   productGroups: ProductGroupType[];
 }) {
+  // setData is not used, but it is required.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [data, setData] = React.useState(() => productGroups);
 
   const table = useReactTable({
@@ -80,21 +74,22 @@ function ProductGroupsTable({
   );
 }
 
-interface ProductGroupsResponse {
-  product_groups: ProductGroupType[];
-}
 
 // TODO convert using react-router loader pattern instead.
 
 export default function ProductGroups() {
-  const productGroupsSWR = useSWR<ProductGroupsResponse>(url, fetchJSON);
+  const productGroupsSWR = useSWR<ProductGroupsResponse>(
+    productGroupsUrl,
+    fetchJSON,
+  );
   const productGroups = productGroupsSWR.data?.product_groups;
+  const title = "Product Groups";
 
   return (
     <div>
       <Header />
       <div className="p-4">
-        <p className="text-left text-lg font-bold p-4">Product Groups</p>
+        <p className="text-left text-lg font-bold p-4"> {title}</p>
         <div className="p-4">
           {productGroups && (
             <ProductGroupsTable productGroups={productGroups} />

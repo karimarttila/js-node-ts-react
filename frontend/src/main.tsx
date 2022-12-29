@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Index from "./routes/index";
 import ProductGroups from "./routes/product_groups";
 import Products from "./routes/products";
+import Product from "./routes/product";
 import "./index.css";
 
 const rootElement = document.getElementById("root");
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "products/:pgId",
     element: <Products />,
+  },
+  {
+    path: "product/:pgId/:pId",
+    element: <Product />,
   },
 ]);
 
