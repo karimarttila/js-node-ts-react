@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Index from "./routes/index";
 import ProductGroups from "./routes/product_groups";
+import Products from "./routes/products";
 import "./index.css";
 
 const rootElement = document.getElementById("root");
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "product-groups",
     element: <ProductGroups />,
+  },
+  {
+    path: "products/:pgId",
+    element: <Products />,
   },
 ]);
 

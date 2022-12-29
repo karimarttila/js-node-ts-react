@@ -1,7 +1,6 @@
 import React from "react";
 import Header from "../header";
-import axios from "axios";
-import { hostName, port } from "../utils/util";
+import { hostName, port, fetchJSON } from "../utils/util";
 import useSWR from "swr";
 
 import {
@@ -22,8 +21,10 @@ const pgColumnHelper = createColumnHelper<ProductGroupType>();
 
 const columns = [
   pgColumnHelper.accessor("pgId", {
-    cell: (info) => info.getValue(),
-    header: () => "Id",
+    header: "Id",
+    cell: (info) => (
+      <a href={"/products/" + info.getValue()}> {info.getValue()} </a>
+    ),
   }),
   pgColumnHelper.accessor("name", {
     cell: (info) => info.getValue(),
@@ -84,13 +85,6 @@ interface ProductGroupsResponse {
 }
 
 // TODO convert using react-router loader pattern instead.
-
-async function fetchJSON(url: string) {
-  const response = await axios.get(url);
-  if (response.status === 200 && response.data.ret === "ok")
-    return response.data;
-  throw new Error(response.data.msg);
-}
 
 export default function ProductGroups() {
   const productGroupsSWR = useSWR<ProductGroupsResponse>(url, fetchJSON);

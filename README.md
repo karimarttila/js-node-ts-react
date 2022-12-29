@@ -238,14 +238,13 @@ npx tailwindcss init -p
 
 Then I followed: [Install Tailwind CSS with Vite](https://tailwindcss.com/docs/guides/vite).
 
-
 ### JSX vs Hiccup
 
 TODO: vertaa JSX Clojurescript Hiccup.
 
 ### Asynchronous Programming Model
 
-TODO:
+The asynchronous programming model is something that you need to remember both in the backend and in the frontend side. Example:
 
 ```Typescript
 export default function ProductGroups() {
@@ -256,8 +255,7 @@ export default function ProductGroups() {
 ...
 ```
 
-... ja sitten ihmettelin, miksi siellä ProductGroupsTable :ssa homma räjähtää datan käsittelyssä.
-Eli tuota komponenttia saa kutsua vain kun dataa on, eli:
+The `productGroups` are not there when we try to mount the ProductGroupsTable. Therefore we need to check if the data has arrived:
 
 ```Typescript
           {productGroups && (
@@ -265,7 +263,7 @@ Eli tuota komponenttia saa kutsua vain kun dataa on, eli:
           )}
 ```
 
-Tässäkin console.log on Javascript koodarin ystävä.
+I was wondering this and find out the problem using `console.log` in the `ProductGroupsTable` component.
 
 ## Serverless Local Development
 
