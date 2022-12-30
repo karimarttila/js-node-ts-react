@@ -361,6 +361,10 @@ The `productGroups` are not there when we try to mount the ProductGroupsTable. T
 
 I was wondering this and find out the problem using `console.log` in the `ProductGroupsTable` component.
 
+### Using React Off-the-shelf Components
+
+I could have used a simple [HTML Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table), but I wanted to experiment with some React Off-the-shelf component, and therefore I used with ProductGroups and Products the [TanStack Table](https://tanstack.com/table/v8) headless table component. Using the examples it was quite simple to implement the tables used in this demo app with Tanstack Table. Tanstack Table provides pagination, sorting, filtering etc out of the box. 
+
 
 ## Deployment to AWS
 
