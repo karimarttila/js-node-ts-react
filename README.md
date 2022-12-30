@@ -362,7 +362,9 @@ I was wondering about this and found out the problem using `console.log` in the 
 
 ### Using React Off-the-shelf Components
 
-I could have used a simple [HTML Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table), but I wanted to experiment with some React Off-the-shelf component, and therefore I used with ProductGroups and Products the [TanStack Table](https://tanstack.com/table/v8) headless table component. Using the examples it was quite simple to implement the tables used in this demo app with Tanstack Table. Tanstack Table provides pagination, sorting, filtering etc out of the box. 
+I could have used a simple [HTML Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table), but I wanted to experiment with some React Off-the-shelf component, and therefore I used with ProductGroups and Products the [TanStack Table](https://tanstack.com/table/v8) headless table component. Using the examples it was quite simple to implement the tables used in this demo app with Tanstack Table. Tanstack Table provides pagination, sorting, filtering etc out of the box.
+
+Though, you could implement those features yourself. [Aarni Koskela](https://github.com/akx) demonstrated in the Koodiklinikka slack how he implemented pagination in a few minutes. (Quite an impressive video, you can watch it also on [Youtube](https://youtu.be/30ScPJZplXk).)
 
 ### Error Handling
 
