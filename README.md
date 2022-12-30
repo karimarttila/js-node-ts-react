@@ -12,7 +12,7 @@ Also thanks to all of those in [Koodiklinikka Slack](https://koodiklinikka.fi/),
 
 ## Quick Installation Guide
 
-TODO
+Just use `pnpm install` and `pnpm dev` both in the backend and frontend sides.
 
 ## Technologies
 
