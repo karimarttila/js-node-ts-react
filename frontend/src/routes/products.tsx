@@ -127,7 +127,7 @@ function ProductsTable({
   );
 }
 
-// TODO convert using react-router loader pattern instead.
+// Compare products.tsx (SWR) with product.tsx (loader pattern).
 
 export default function Products() {
   const { pgId } = useParams();

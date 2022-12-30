@@ -184,6 +184,13 @@ Functional programming is quite nice with Javascript. If you have been programmi
 
 Javascript is a quite nice functional programming language. I especially like the functional features and literal data structures. The asynchronous nature of Javascript (just one thread) is a bit eccentric. What I miss is a good [REPL-driven development](https://clojure.org/guides/repl/introduction) DX as you have with [Clojure](https://clojure.org/) - not possible since Javascript is not a [Lisp](https://en.wikipedia.org/wiki/Lisp_(programming_language)) (not a [homoiconic language](https://en.wikipedia.org/wiki/Homoiconicity)) - a real REPL is not just possible with Javascript.
 
+## Serverless Local Development
+
+This demo app uses instructions provided in the [Serverless local development](https://www.serverless.com/blog/serverless-local-development) blog post and the [Serverless Offline](https://www.serverless.com/plugins/serverless-offline) plugin.
+
+Using the Serverless local development you can run your server in your local development simulating the actual serverless production environment (in our case, AWS Lambda).
+
+
 ## Frontend
 
 The frontend is a simple [React](https://reactjs.org/) application written using [Typescript](https://www.typescriptlang.org/). I use [Vite](https://vitejs.dev/) frontend development (bundling etc.). As a CSS utility library, I use [Tailwind](https://tailwindcss.com/). I also use a couple of other libraries, e.g. [Redux](https://redux.js.org/) for state management, and [React Router](https://reactrouter.com/en/main) as a frontend routing library.
@@ -265,11 +272,6 @@ The `productGroups` are not there when we try to mount the ProductGroupsTable. T
 
 I was wondering this and find out the problem using `console.log` in the `ProductGroupsTable` component.
 
-## Serverless Local Development
-
-This demo app uses instructions provided in the [Serverless local development](https://www.serverless.com/blog/serverless-local-development) blog post and the [Serverless Offline](https://www.serverless.com/plugins/serverless-offline) plugin.
-
-Using the Serverless local development you can run your server in your local development simulating the actual serverless production environment (in our case, AWS Lambda).
 
 ## Deployment to AWS
 

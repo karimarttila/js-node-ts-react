@@ -1,16 +1,40 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 import Header from "../header";
-import { productUrl, fetchJSON, ProductType, ProductResponse } from "../utils/util";
-import useSWR from "swr";
+import { productUrl, ProductType} from "../utils/util";
 
-// TODO convert using react-router loader pattern instead.
 
-export default function Product() {
-  const { pgId, pId } = useParams();
+// Using react-router loader pattern to compare with products.tsx.
+
+type productParams = {
+  pgId: string, 
+  pId: string
+}
+
+export async function productLoader({ params }: { params: productParams }): Promise<ProductType> {
+  const { pgId, pId } = params;
   const productUrlWithIds = productUrl + `/${pgId}` + `/${pId}`;
-  const productSWR = useSWR<ProductResponse>(productUrlWithIds, fetchJSON);
-  const product = productSWR.data?.product;
+  const product: ProductType = await axios
+  .get(productUrlWithIds)
+  .then((response) => {
+    if (response.status === 200 && response.data.ret === "ok")
+      return response.data.product;
+  })
+  .catch((error) => {
+    console.log("error", error);
+  });
+  if (!product) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+  return product;  
+}
+
+export function Product() {
+  const product: ProductType = useLoaderData() as ProductType;
   const title = "Product";
 
   function ProductTable({
@@ -18,9 +42,6 @@ export default function Product() {
   }: {
     product: ProductType;
   }) {
-    // setData is not used, but it is required.
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    
     return (
       <div className="p-4">
         <table>

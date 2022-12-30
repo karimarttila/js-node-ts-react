@@ -74,9 +74,6 @@ function ProductGroupsTable({
   );
 }
 
-
-// TODO convert using react-router loader pattern instead.
-
 export default function ProductGroups() {
   const productGroupsSWR = useSWR<ProductGroupsResponse>(
     productGroupsUrl,
