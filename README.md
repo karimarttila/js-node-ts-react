@@ -318,7 +318,7 @@ Programming Typescript with its type system makes frontend programming easier. E
 
 ### Vite
 
-[Vite](https://vitejs.dev/ provides various services for frontend development, e.g., hot reloading in the browser, and so on. I'm not going to dive deeper into Vite, you can read more about it in the Vite documentation.
+[Vite](https://vitejs.dev/) provides various services for frontend development, e.g., hot reloading in the browser, and so on. I'm not going to dive deeper into Vite, you can read more about it in the Vite documentation.
 
 ### Tailwind
 
@@ -335,7 +335,7 @@ I have previously used [Bulma](https://bulma.io/), which is a CSS framework. Tai
 
 ### JSX vs Hiccup
 
-In the Clojure land I used [Hiccup](https://github.com/weavejester/hiccup) to represent the HTML. [JSX](https://reactjs.org/docs/introducing-jsx.html) does the same thing in the Javascript / Typescript land. Now that I have used both Hiccup and JSX I can say that Hiccup provides a better developer experience. Hiccup is just Clojure data structures (maps and vectors) and manipulating Hiccup using Clojure is really effective and pleasant.
+In the Clojure land I used [Hiccup](https://github.com/weavejester/hiccup) to represent HTML. [JSX](https://reactjs.org/docs/introducing-jsx.html) does the same thing in the Javascript / Typescript land. Now that I have used both Hiccup and JSX I can say that Hiccup provides a better developer experience. Hiccup is just Clojure data structures (maps and vectors) and manipulating Hiccup using Clojure is really effective and pleasant.
 
 ### Asynchronous Programming Model
 
@@ -358,7 +358,7 @@ The `productGroups` are not there when we try to mount the ProductGroupsTable. T
           )}
 ```
 
-I was wondering this and find out the problem using `console.log` in the `ProductGroupsTable` component.
+I was wondering about this and found out the problem using `console.log` in the `ProductGroupsTable` component.
 
 ### Using React Off-the-shelf Components
 
