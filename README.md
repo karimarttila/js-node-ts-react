@@ -22,7 +22,6 @@ Here is a short description of the technologies used in this demonstration appli
 - [Node](https://nodejs.org/en/) is a Javascript runtime for the backend.
 - [Typescript](https://www.typescriptlang.org/) is a strongly typed programming language for Javascript.
 - [React](https://reactjs.org/) is a popular JavaScript library for building user interfaces for the browser.
-- [Redux](https://redux.js.org/) is a popular state management library for Javascript Applications.
 - [Vite](https://vitejs.dev/) is a tool for frontend development (e.g. hot reloading for the browser).
 - [Tailwind](https://tailwindcss.com/) is a popular CSS utility library.
 - [Serverless Framework](https://www.serverless.com/) for running the server in local development and deploying to AWS.
@@ -88,7 +87,7 @@ You can use VSCode debugger with this `launch.json` configuration:
 
 At the end of your Javascript file under debugging add code to call the function you want to debug, example:
 
-```Javascript
+```javascript
 // For debugging using the node Run and Debug REPL.
 const debugRet = await getProductGroups();
 logger.debug('debugRet: ', debugRet);
@@ -125,7 +124,7 @@ There were quite a lot of hassle and linter warnings regarding whether to use im
 
 Then I tried the [VSCode Debugger](#vscode-debugger) and the imports broke once again. Example:
 
-```Javascript
+```javascript
 import pkg from 'fs';
 const { promises: fs } = pkg;
 // NOTE: This is not working when using Node Run and Debug REPL.
@@ -138,7 +137,7 @@ I'm not a Javascript guru so I won't dive any deeper into this mess.
 
 Since the Javascript engine runs with just one thread the engine uses an [event loop](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). Therefore most libraries use [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). You can get a bit "synchronous" nature to this programming model using [async/await](https://www.w3schools.com/js/js_async.asp) model. Example:
 
-```Javascript
+```javascript
 ...
 // Internal function to load the products to the domain db.
 async function loadProducts(pgId) {
@@ -152,7 +151,7 @@ async function loadProducts(pgId) {
 
 `fs.readFile` is asynchronous. But we need the data here, so we `await`. Therefore we need to mark the function as `async`. Any caller of this function needs to remember this:
 
-```Javascript
+```javascript
 async function getProducts(pgId) {
   logger.debug(`ENTER domain.getProducts, pgId: ${pgId}`);
   const productsKey = `pg-${pgId}-products`;
@@ -170,7 +169,7 @@ async function getProducts(pgId) {
 
 Functional programming is quite nice with Javascript. If you have been programming e.g. [Clojure](https://clojure.org/) you have no issues using map/reduce/filter with Javascript. Example:
 
-```Javascript
+```javascript
     const ret = rows.reduce((acc, row) => {
       if (row.length === 2) {
         const [key, val] = row;
@@ -193,7 +192,7 @@ Using the Serverless local development you can run your server in your local dev
 
 ## Frontend
 
-The frontend is a simple [React](https://reactjs.org/) application written using [Typescript](https://www.typescriptlang.org/). I use [Vite](https://vitejs.dev/) frontend development (bundling etc.). As a CSS utility library, I use [Tailwind](https://tailwindcss.com/). I also use a couple of other libraries, e.g. [Redux](https://redux.js.org/) for state management, and [React Router](https://reactrouter.com/en/main) as a frontend routing library.
+The frontend is a simple [React](https://reactjs.org/) application written using [Typescript](https://www.typescriptlang.org/). I use [Vite](https://vitejs.dev/) frontend development (bundling etc.). As a CSS utility library, I use [Tailwind](https://tailwindcss.com/). I also use a couple of other libraries, e.g. [React Router](https://reactrouter.com/en/main) as a frontend routing library.
 
 ## Frontend Development
 
@@ -231,7 +230,7 @@ When implementing the demo app, the evolution of fetching data was like this:
 
 1. I first started using [Axios](https://axios-http.com/docs/intro) and [React state](https://beta.reactjs.org/learn/managing-state).
 
-```Typescript
+```typescript
 export default function ProductGroups() {
   return productGroupsPage;
   const [productGroups, setProductGroups] = React.useState(null);
@@ -263,7 +262,7 @@ export default function ProductGroups() {
 
 2. Then based on the feedback given in the [Koodiklinikka slack](https://koodiklinikka.fi/), I converted the React state / Axios using [SWR](https://github.com/vercel/swr) React hook for fetching data (see: [products.tsx](https://github.com/karimarttila/js-node-ts-react/blob/main/frontend/src/routes/products.tsx)).
 
-```Typescript
+```typescript
 export default function Products() {
   const { pgId } = useParams();
   const pgIdNum = parseInt(pgId || "-1");
@@ -281,7 +280,7 @@ export default function Products() {
 
 3. Since the React-router tutorial used the loader pattern, I wanted to compare this solution to the SWR hook solution, and therefore I converted [product.tsx](https://github.com/karimarttila/js-node-ts-react/blob/main/frontend/src/routes/product.tsx) to use the React-router loader pattern.
 
-```Typescript
+```typescript
 export async function productLoader({ params }: { params: productParams }): Promise<ProductType> {
   const { pgId, pId } = params;
   const productUrlWithIds = productUrl + `/${pgId}` + `/${pId}`;
@@ -309,7 +308,7 @@ export function Product() {
 ...
 ```
 
-I like the SWR react-hook solution (#2) best. Compared to solution #1, the SWR react-hook is simpler. Compared to solution #3, the SWR solution is more straightforward and no need for the IoC (inversion of control) pattern makes the solution more readable.
+I like the SWR react-hook solution (#2) best. Compared to solution #1, the SWR react-hook is simpler. Compared to solution #3, the SWR solution is more straightforward and no need for the IoC (inversion of control) pattern makes the solution more readable. (I couldn't use SWR in the #3 solution since eslint complained that you cannot use a React hook in a non-React component - therefore using Axios again.)
 
 But I'm not a frontend guru, so most probably there is some use case for the #3 solution.
 
@@ -342,7 +341,7 @@ In the Clojure land I used [Hiccup](https://github.com/weavejester/hiccup) to re
 
 The asynchronous programming model is something that you need to remember both on the backend and frontend sides. Example:
 
-```Typescript
+```typescript
 export default function ProductGroups() {
   const productGroupsSWR = useSWR(url, fetchJSON);
   const productGroups = productGroupsSWR.data?.product_groups;
@@ -353,7 +352,7 @@ export default function ProductGroups() {
 
 The `productGroups` are not there when we try to mount the ProductGroupsTable. Therefore we need to check if the data has arrived:
 
-```Typescript
+```typescript
           {productGroups && (
             <ProductGroupsTable productGroups={productGroups} />
           )}
@@ -364,6 +363,10 @@ I was wondering this and find out the problem using `console.log` in the `Produc
 ### Using React Off-the-shelf Components
 
 I could have used a simple [HTML Table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table), but I wanted to experiment with some React Off-the-shelf component, and therefore I used with ProductGroups and Products the [TanStack Table](https://tanstack.com/table/v8) headless table component. Using the examples it was quite simple to implement the tables used in this demo app with Tanstack Table. Tanstack Table provides pagination, sorting, filtering etc out of the box. 
+
+### Error Handling
+
+I skipped error handling in this demo app. Possibly I implement later on some basic error handling.
 
 
 ## Deployment to AWS
