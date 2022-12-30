@@ -213,26 +213,113 @@ But I had never used React with Javascript / Typescript. Therefore, before imple
 
 ### React Router
 
-Since I use React, using [React Router](https://reactrouter.com/en/main) as a frontend routing library is natural.
+Since I use React, using [React Router](https://reactrouter.com/en/main) as a frontend routing library is a natural choice.
 
-Before implementing my own routing for this demo application, I did the excellent [React Routing Tutorial](https://reactrouter.com/en/main/start/tutorial).
+Before implementing the routing for this demo application, I did the excellent [React Routing Tutorial](https://reactrouter.com/en/main/start/tutorial). After implementing the demo application I realized that most of the stuff in that tutorial is not needed in a simple frontend application like in the demo app I implemented. More about that in the next chapter.
 
-TODO: Kerro tässä evoluutio: 
-- Ensin Axios ja oma state.
-- Sitten swr
-- Sitten siirretty loaderiin
-- (ks. git historysta: product_groups.tsx)
+### Comparing SWR React Hook and React-router Loader Pattern
 
+React-router provides API for fetching the data needed in the React component, see [Loading Data](https://reactrouter.com/en/main/start/tutorial#loading-data) chapter in the tutorial. This is an IoC (inverse of control, a.k.a. Hollywood principle): you provide a function for fetching the data and provide the function when configuring the router. Then the React component can get the loader using `import { useLoaderData } from "react-router-dom";` API.
+
+Compare the solutions:
+
+- [main.tsx](https://github.com/karimarttila/js-node-ts-react/blob/main/frontend/src/main.tsx): react-router configuration.
+- [product.tsx](https://github.com/karimarttila/js-node-ts-react/blob/main/frontend/src/routes/product.tsx): React-router loader pattern.
+- [products.tsx](https://github.com/karimarttila/js-node-ts-react/blob/main/frontend/src/routes/products.tsx): Using SWR react hook in the React component.
+
+When implementing the demo app, the evolution of fetching data was like this:
+
+1. I first started using [Axios](https://axios-http.com/docs/intro) and [React state](https://beta.reactjs.org/learn/managing-state).
+
+```Typescript
+export default function ProductGroups() {
+  return productGroupsPage;
+  const [productGroups, setProductGroups] = React.useState(null);
+
+  React.useEffect(() => {
+    axios
+      .get(baseURL)
+      .then((response) => {
+        console.log("response", response);
+        console.log("product_groups", response.data.product_groups);
+        if (response.status === 200 && response.data.ret === "ok")
+          setProductGroups(response.data.product_groups);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  }, []);
+
+  return (
+    <div className="App">
+      <div>
+        <Header />
+        {productGroups && <ProductGroupsTable productGroups={productGroups} />}
+      </div>
+    </div>
+  );
+}
+```
+
+2. Then based on the feedback given in the [Koodiklinikka slack](https://koodiklinikka.fi/), I converted the React state / Axios using [SWR](https://github.com/vercel/swr) React hook for fetching data (see: [products.tsx](https://github.com/karimarttila/js-node-ts-react/blob/main/frontend/src/routes/products.tsx)).
+
+```Typescript
+export default function Products() {
+  const { pgId } = useParams();
+  const pgIdNum = parseInt(pgId || "-1");
+  const productGroupsSWR = useSWR<ProductGroupsResponse>(productGroupsUrl, fetchJSON);
+  const productGroups = productGroupsSWR.data?.product_groups;
+  const pgName = productGroups?.find((pg) => pg.pgId === pgIdNum)?.name ||"";
+  const title = "Products - " + pgName;
+  const productsUrlWithPgId = productsUrl + `/${pgId}`;
+  const productsSWR = useSWR<ProductsResponse>(productsUrlWithPgId, fetchJSON);
+  const products = productsSWR.data?.products;
+
+  return (
+...
+```
+
+3. Since the React-router tutorial used the loader pattern, I wanted to compare this solution to the SWR hook solution, and therefore I converted [product.tsx](https://github.com/karimarttila/js-node-ts-react/blob/main/frontend/src/routes/product.tsx) to use the React-router loader pattern.
+
+```Typescript
+export async function productLoader({ params }: { params: productParams }): Promise<ProductType> {
+  const { pgId, pId } = params;
+  const productUrlWithIds = productUrl + `/${pgId}` + `/${pId}`;
+  const product: ProductType = await axios
+  .get(productUrlWithIds)
+  .then((response) => {
+    if (response.status === 200 && response.data.ret === "ok")
+      return response.data.product;
+  })
+  .catch((error) => {
+    console.log("error", error);
+  });
+  if (!product) {
+    throw new Response("", {
+      status: 404,
+      statusText: "Not Found",
+    });
+  }
+  return product;  
+}
+
+export function Product() {
+  const product: ProductType = useLoaderData() as ProductType;
+  const title = "Product";
+...
+```
+
+I like the SWR react-hook solution (#2) best. Compared to solution #1, the SWR react-hook is simpler. Compared to solution #3, the SWR solution is more straightforward and no need for the IoC (inversion of control) pattern makes the solution more readable.
+
+But I'm not a frontend guru, so most probably there is some use case for the #3 solution.
 
 ### Typescript
 
-Typescript selvästi auttoi funktioiden parametrien tyypityksessä yms. Selvästikin olisi kannattanut tehdä myös backend Typescriptilla (mutta halusin tehdä Javascriptilla koska alkavassa projektissa käytetään sitä).
+Programming Typescript with its type system makes frontend programming easier. E.g., many bugs related to parameters and function return values are detected in the source code with a good type system. Since I created the backend using Javascript and the frontend using Typescript I can now compare the two programming languages. My conclusion is that you should use Typescript both in the backend and in the frontend.
 
 ### Vite
 
-Live reload yms.
-
-
+[Vite](https://vitejs.dev/ provides various services for frontend development, e.g., hot reloading in the browser, and so on. I'm not going to dive deeper into Vite, you can read more about it in the Vite documentation.
 
 ### Tailwind
 
@@ -245,13 +332,15 @@ npx tailwindcss init -p
 
 Then I followed: [Install Tailwind CSS with Vite](https://tailwindcss.com/docs/guides/vite).
 
+I have previously used [Bulma](https://bulma.io/), which is a CSS framework. Tailwind is a lower-level CSS library. If you need a coherent CSS framework with preconfigured components, go with Bulma. The project I'm about to start in one week uses Tailwind and therefore I wanted to have some Tailwind experience, and therefore I chose to use Tailwind in this learning project.
+
 ### JSX vs Hiccup
 
-TODO: vertaa JSX Clojurescript Hiccup.
+In the Clojure land I used [Hiccup](https://github.com/weavejester/hiccup) to represent the HTML. [JSX](https://reactjs.org/docs/introducing-jsx.html) does the same thing in the Javascript / Typescript land. Now that I have used both Hiccup and JSX I can say that Hiccup provides a better developer experience. Hiccup is just Clojure data structures (maps and vectors) and manipulating Hiccup using Clojure is really effective and pleasant.
 
 ### Asynchronous Programming Model
 
-The asynchronous programming model is something that you need to remember both in the backend and in the frontend side. Example:
+The asynchronous programming model is something that you need to remember both on the backend and frontend sides. Example:
 
 ```Typescript
 export default function ProductGroups() {
