@@ -1,5 +1,5 @@
 import application from './app.mjs';
-import logger from './src/util/logger.mjs';
+// import logger from './src/util/logger.mjs';
 
 const serverlessFramework = import('serverless-http');
 
@@ -13,7 +13,7 @@ const handler = async (event, context) => {
   const app = await application;
   const result = await serverless(app)(event, context);
   // For debugging:
-  logger.info(`handler: result: ${JSON.stringify(result)}`);
+  // logger.debug(`handler: result: ${JSON.stringify(result)}`);
 
   return result;
 };

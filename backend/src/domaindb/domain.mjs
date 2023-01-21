@@ -1,6 +1,7 @@
 import papaparse from 'papaparse';
 import pkg from 'fs';
 import logger from '../util/logger.mjs';
+import { NotFoundError } from '../util/errors.mjs';
 
 const { promises: fs } = pkg;
 // NOTE: This is not working when using Node Run and Debug REPL.
@@ -13,6 +14,18 @@ const productGroupsCsvFile = 'resources/product-groups.csv';
 // Simulates domain database.
 const domain = {};
 
+async function readFile(fileName) {
+  logger.debug(`ENTER domain.readFile: ${fileName}`);
+  let csvContents = null;
+  try {
+    csvContents = await fs.readFile(fileName, 'utf8');
+  } catch (err) {
+    logger.error(`Error reading file: ${fileName}`);
+    throw new NotFoundError(`Error reading file: ${fileName}`);
+  }
+  return csvContents;
+}
+
 /**
  * Gets product groups.
  * Simulates the domain db, but actually just reads the CSV file.
@@ -21,7 +34,7 @@ const domain = {};
 async function getProductGroups() {
   logger.debug('ENTER domain.getProductGroups');
   if ((domain['product-groups'] === null) || (domain['product-groups'] === undefined)) {
-    const csvContents = await fs.readFile(productGroupsCsvFile, 'utf8');
+    const csvContents = await readFile(productGroupsCsvFile);
     const rows = parse(csvContents, { delimiter: '\t' }).data;
     const ret = rows
       .map((row) => {
@@ -47,7 +60,7 @@ async function loadProducts(pgId) {
   const productsKey = `pg-${pgId}-products`;
   if ((domain[productsKey] === null) || (domain[productsKey] === undefined)) {
     const productsCsvFile = `resources/pg-${pgId}-products.csv`;
-    const csvContents = await fs.readFile(productsCsvFile, 'utf8');
+    const csvContents = await readFile(productsCsvFile);
     const rows = papaparse.parse(csvContents, { delimiter: '\t' }).data;
     const ret = rows.reduce((acc, row) => {
       if (row.length === 8) {
@@ -113,11 +126,12 @@ async function getProduct(pgId, pId) {
 }
 
 // For debugging using the node Run and Debug REPL.
+// Open terminal in the backend directory and run: node src/domaindb/domain.mjs
 // const debugRet = await getProductGroups();
 // logger.debug('debugRet: ', debugRet);
 // await loadProducts(1);
 // logger.debug('domain:: ', domain);
-// const debugRet = await getProducts(2);
+// const debugRet = await getProducts(3);
 // logger.debug('debugRet: ', debugRet);
 // const debugRet = await getProduct(2, 49);
 // logger.debug('debugRet: ', debugRet);

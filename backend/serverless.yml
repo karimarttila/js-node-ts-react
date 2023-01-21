@@ -13,8 +13,17 @@ provider:
   name: aws
   region: eu-north-1
   runtime: nodejs18.x
-  stage: dev
+  stage: ${opt:stage, 'local'}
   versionFunctions: false
+  environment:
+    STAGE: ${self:custom.stage}
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  serverless-offline:
+    httpPort: 6600
+    websocketPort: 6601
+    lambdaPort: 6602
 
 plugins:
   - serverless-esbuild
@@ -36,9 +45,3 @@ functions:
       - httpApi:
           path: /product/{pgId}/{pId}
           method: get
-
-custom:
-  serverless-offline:
-    httpPort: 6600
-    websocketPort: 6601
-    lambdaPort: 6602
