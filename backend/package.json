@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --exec serverless offline start",
     "format": "eslint . --fix",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "NODE_ENV=test vitest"
   },
   "dependencies": {
     "@aws-sdk/client-lambda": "^3.231.0",
@@ -30,7 +31,9 @@
     "eslint-plugin-no-floating-promise": "^1.0.2",
     "serverless": "^3.25.1",
     "serverless-esbuild": "^1.34.0",
-    "serverless-offline": "^12.0.3"
+    "serverless-offline": "^12.0.3",
+    "vite": "^4.0.0",
+    "vitest": "^0.27.3"
   },
   "eslintIgnore": [
     "tmp",
