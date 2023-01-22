@@ -69,7 +69,7 @@ export function Product() {
                 <td>{product.price}</td>
                </tr>
                <tr>             
-                <td>Author/Director</td>
+                <td>{product.pgId === 1 ? 'Author' : 'Director'}</td>
                 <td>{product.authorOrDirector}</td>
                </tr>
                <tr>             
@@ -81,7 +81,7 @@ export function Product() {
                 <td>{product.country}</td>
                </tr>
                <tr>             
-                <td>Language/Genre</td>
+                <td>{product.pgId === 1 ? 'Language' : 'Genre'}</td>
                 <td>{product.languageOrGenre}</td>
                </tr>
             </tbody>
