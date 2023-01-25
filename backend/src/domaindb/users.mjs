@@ -57,8 +57,8 @@ const {
  * @param {String} username
  * @returns token
  */
-function generateToken(username) {
-  return jwt.sign({ username }, SECRET, { expiresIn: EXPRIRES_IN });
+function generateToken(username, password) {
+  return jwt.sign({ username, password }, SECRET, { expiresIn: EXPRIRES_IN });
 }
 
 /**
@@ -78,25 +78,12 @@ function validateUser(username, password) {
   if (!valid) {
     throw new ValidationError('Invalid username or password');
   }
-  const token = generateToken(username);
+  const token = generateToken(username, password);
   const newSession = { username, token };
   addSession(newSession);
 
   return token;
 }
-
-// const myToken = generateToken('jarska');
-// console.log(`myToken: ${myToken}`);
-// const decoded = validateToken(myToken);
-// console.log(`decoded: ${JSON.stringify(decoded)}`);
-// let token = validateUser('jarska', 'joo');
-// console.log(`token: ${token}`);
-// const sessions = giveSessions();
-// console.log(`sessions: ${JSON.stringify(sessions)}`);
-// token = validateUser('rane', 'jee');
-// console.log(`sessions: ${JSON.stringify(sessions)}`);
-// token = validateUser('jarska', 'joo');
-// console.log(`sessions: ${JSON.stringify(sessions)}`);
 
 export {
   validateToken, validateUser, giveSessions, clearSessions,

@@ -3,7 +3,7 @@ import { expect, test } from 'vitest';
 import { validateUser, giveSessions, clearSessions } from '../../src/domaindb/users.mjs';
 import { ValidationError } from '../../src/util/errors.mjs';
 
-test('Validate user', () => {
+test('Validate users', () => {
   clearSessions();
   const sessions = giveSessions();
   // console.log(`sessions: ${JSON.stringify(sessions)}`);
@@ -25,6 +25,7 @@ test('Validate user', () => {
   expect(tokenJarska2).not.toBe(null);
   expect(tokenJarska2).not.toBe(undefined);
   expect(sessions.length).toBe(2);
+  // Order counts: should be implementation detail, but let's not worry about it in this demo.
   expect(sessions[1].username).toBe('jarska');
   expect(sessions[1].token).toBe(tokenJarska2);
 });
