@@ -41,17 +41,13 @@ functions:
       - httpApi:
           path: /login
           method: post
-          cors: true
       - httpApi:
           path: /product-groups
           method: get
-          cors: true
       - httpApi:
           path: /products/{pgId}
           method: get
-          cors: true
       - httpApi:
           path: /product/{pgId}/{pId}
           method: get
-          cors: true
 

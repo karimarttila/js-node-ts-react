@@ -1,7 +1,6 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 import router from './src/routing/router.mjs';
-import errorHandler from './src/util/middleware.mjs';
+import { errorHandler } from './src/util/middleware.mjs';
 
 const application = express();
 

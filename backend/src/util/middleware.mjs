@@ -1,6 +1,7 @@
 import logger from './logger.mjs';
 import { production } from './config.mjs';
 import { NotFoundError } from './errors.mjs';
+import { validateToken } from '../domaindb/users.mjs';
 
 // ErrorHandler.js
 // eslint-disable-next-line no-unused-vars
@@ -18,17 +19,12 @@ const errorHandler = (err, req, res, _next) => {
 
 const verifyToken = (req, res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-token'];
-
   if (!token) {
     throw new NotFoundError('A token is required for authentication');
   }
-  try {
-    const decoded = jwt.verify(token, config.TOKEN_KEY);
-    req.user = decoded;
-  } catch (err) {
-    return res.status(401).send('Invalid Token');
-  }
+  validateToken(token);
   return next();
 };
 
-export default { errorHandler, verifyToken };
+// export default errorHandler;
+export { errorHandler, verifyToken };
