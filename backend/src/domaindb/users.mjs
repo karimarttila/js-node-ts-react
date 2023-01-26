@@ -34,6 +34,9 @@ function createSessionDb() {
   function findSession(session) {
     return sessionDb.find((s) => s.username === session.username);
   }
+  function findSessionByToken(token) {
+    return sessionDb.find((s) => s.token === token);
+  }
   function addSession(session) {
     const i = sessionDb.findIndex((s) => s.username === session.username);
     if (i !== -1) {
@@ -44,12 +47,12 @@ function createSessionDb() {
   }
 
   return {
-    giveSessions, findSession, addSession, clearSessions,
+    giveSessions, findSession, findSessionByToken, addSession, clearSessions,
   };
 }
 
 const {
-  giveSessions, findSession, addSession, clearSessions,
+  giveSessions, findSession, addSession, clearSessions, findSessionByToken,
 } = createSessionDb();
 
 /**
@@ -57,8 +60,8 @@ const {
  * @param {String} username
  * @returns token
  */
-function generateToken(username, password) {
-  return jwt.sign({ username, password }, SECRET, { expiresIn: EXPRIRES_IN });
+function generateToken(username) {
+  return jwt.sign({ username }, SECRET, { expiresIn: EXPRIRES_IN });
 }
 
 /**
@@ -68,8 +71,18 @@ function generateToken(username, password) {
  * @returns token decoded
  */
 function validateToken(token) {
-  const decoded = jwt.verify(token, SECRET);
-  return decoded;
+  const decodedToken = jwt.verify(token, SECRET);
+  const session = findSessionByToken(token);
+  if (!session) {
+    throw new ValidationError('Token not found in the session database');
+  }
+  if (!decodedToken) {
+    throw new ValidationError('Could not decode token');
+  }
+  if (session.username !== decodedToken.username) {
+    throw new ValidationError('Token username does not match the session username');
+  }
+  return decodedToken;
 }
 
 function validateUser(username, password) {
@@ -78,13 +91,13 @@ function validateUser(username, password) {
   if (!valid) {
     throw new ValidationError('Invalid username or password');
   }
-  const token = generateToken(username, password);
-  const newSession = { username, token };
+  const token = generateToken(username);
+  const newSession = { username, password, token };
   addSession(newSession);
 
   return token;
 }
 
 export {
-  validateToken, validateUser, giveSessions, clearSessions,
+  validateToken, validateUser, giveSessions, clearSessions, findSessionByToken,
 };
