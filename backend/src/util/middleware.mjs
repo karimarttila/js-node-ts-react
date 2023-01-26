@@ -17,7 +17,7 @@ const errorHandler = (err, req, res, _next) => {
   });
 };
 
-const verifyToken = (req, res, next) => {
+const verifyToken = (req, _res, next) => {
   const token = req.body.token || req.query.token || req.headers['x-token'];
   if (!token) {
     throw new NotFoundError('A token is required for authentication');

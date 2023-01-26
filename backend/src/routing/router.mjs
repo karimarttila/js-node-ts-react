@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import { getProductGroups, getProducts, getProduct } from '../domaindb/domain.mjs';
 import { NotFoundError } from '../util/errors.mjs';
 import { validateUser } from '../domaindb/users.mjs';
+import { verifyToken } from '../util/middleware.mjs';
 
 const router = express.Router();
 
@@ -47,7 +48,7 @@ router.post('/login', jsonParser, (req, res, next) => {
   }
 });
 
-router.get('/product-groups', async (req, res, next) => {
+router.get('/product-groups', verifyToken, async (req, res, next) => {
   try {
     const productGroups = await getProductGroups();
     const ret = { ret: 'ok', product_groups: productGroups };
@@ -57,7 +58,7 @@ router.get('/product-groups', async (req, res, next) => {
   }
 });
 
-router.get('/products/:pgId', async (req, res, next) => {
+router.get('/products/:pgId', verifyToken, async (req, res, next) => {
   try {
     const buf = await getProducts(parseInt(req.params.pgId, 10));
     const ret = { ret: 'ok', products: buf };
@@ -67,7 +68,7 @@ router.get('/products/:pgId', async (req, res, next) => {
   }
 });
 
-router.get('/product/:pgId/:pId', async (req, res, next) => {
+router.get('/product/:pgId/:pId', verifyToken, async (req, res, next) => {
   try {
     const buf = await getProduct(parseInt(req.params.pgId, 10), parseInt(req.params.pId, 10));
     const ret = { ret: 'ok', product: buf };
