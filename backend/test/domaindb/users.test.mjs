@@ -5,7 +5,7 @@ import {
 } from '../../src/domaindb/users.mjs';
 import { ValidationError } from '../../src/util/errors.mjs';
 
-test('Validate users', () => {
+test('Validate users ok', () => {
   clearSessions();
   const sessions = giveSessions();
   // console.log(`sessions: ${JSON.stringify(sessions)}`);

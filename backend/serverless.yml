@@ -37,7 +37,9 @@ functions:
   backend:
     handler: index.default
     events:
-      - httpApi: 'GET /hello'
+      - httpApi:
+          path: /hello
+          method: get
       - httpApi:
           path: /login
           method: post
