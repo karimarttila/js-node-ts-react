@@ -54,6 +54,34 @@ async function getProductGroups() {
   return domain['product-groups'];
 }
 
+const createBook = (row) => {
+  const [pId, pgId, title, price, author, year, country, language] = row;
+  return {
+    pId: parseInt(pId, 10),
+    pgId: parseInt(pgId, 10),
+    title,
+    price: parseFloat(price),
+    author,
+    year: parseInt(year, 10),
+    country,
+    language,
+  };
+};
+
+const createMovie = (row) => {
+  const [pId, pgId, title, price, director, year, country, genre] = row;
+  return {
+    pId: parseInt(pId, 10),
+    pgId: parseInt(pgId, 10),
+    title,
+    price: parseFloat(price),
+    director,
+    year: parseInt(year, 10),
+    country,
+    genre,
+  };
+};
+
 // Internal function to load the products to the domain db.
 async function loadProducts(pgId) {
   logger.debug(`ENTER domain.loadProducts, pgId: ${pgId}`);
@@ -64,22 +92,15 @@ async function loadProducts(pgId) {
     const rows = papaparse.parse(csvContents, { delimiter: '\t' }).data;
     const ret = rows.reduce((acc, row) => {
       if (row.length === 8) {
-        // logger.debug(`row: ${JSON.stringify(row)}`);
-        // Variable destructuring example.
-        const [myPId, myPgId, myTitle, myPrice, myAuthorOrDirector, myYear, myCountry,
-          myLanguageOrGenre] = row;
-        acc.push(
-          {
-            pId: parseInt(myPId, 10),
-            pgId: parseInt(myPgId, 10),
-            title: myTitle,
-            price: parseFloat(myPrice),
-            authorOrDirector: myAuthorOrDirector,
-            year: parseInt(myYear, 10),
-            country: myCountry,
-            languageOrGenre: myLanguageOrGenre,
-          },
-        );
+        let product = null;
+        if (pgId === 1) {
+          product = createBook(row);
+        } else if (pgId === 2) {
+          product = createMovie(row);
+        }
+        if (product !== null) {
+          acc.push(product);
+        }
       }
       return acc;
     }, []);
@@ -137,4 +158,3 @@ async function getProduct(pgId, pId) {
 // logger.debug('debugRet: ', debugRet);
 
 export { getProductGroups, getProducts, getProduct };
-// exports.getProductGroups = getProductGroups;

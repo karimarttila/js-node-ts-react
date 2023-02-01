@@ -1,7 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { defineConfig } from 'vite';
-// Configure Vitest (https://vitest.dev/config/)
-// https://vitejs.dev/config/
+
+// NOTE: Unit tests using vitest.
+// Integration tests using pactum (see directory: test-integration).
 export default defineConfig({
   test: {
     globals: true,
