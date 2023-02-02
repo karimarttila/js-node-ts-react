@@ -41,9 +41,54 @@ it('Call /product-groups', async () => {
     .expectJsonMatch({ ret: 'ok', product_groups: [{ pgId: 1, name: 'Books' }, { pgId: 2, name: 'Movies' }] });
 });
 
-// TODO: kirjoita testit:
-// - header x-token puuttuu => 404
-// - /products/:pgId
-// - /product/:pgId/:pId
-// Sitten kirjoita BLOGI backend testauksesta.
-// Sitten toteuta login frontendiin ja kirjoita siitä blogi.
+it('Call /product-groups, token missing', async () => {
+  const res = await axios.post(`${baseUrl}/login`, { username: 'jarska', password: 'joo' });
+  const { token } = res.data;
+  await spec()
+    .get(`${baseUrl}/product-groups`)
+    .expectStatus(404);
+});
+
+it('Call /products/1', async () => {
+  const res = await axios.post(`${baseUrl}/login`, { username: 'jarska', password: 'joo' });
+  const { token } = res.data;
+  await spec()
+    .get(`${baseUrl}/products/1`)
+    .withHeaders({ 'x-token': token })
+    .expectStatus(200)
+    .expectBodyContains({
+      pId: 2017,
+      pgId: 1,
+      title: 'Sinuhe egyptiläinen',
+      price: 13.42,
+      author:
+      'Mika Waltari',
+      year: 1945,
+      country: 'Finland',
+      language: 'Finnish',
+    });
+});
+
+it('Call /product/2/49', async () => {
+  const res = await axios.post(`${baseUrl}/login`, { username: 'jarska', password: 'joo' });
+  const { token } = res.data;
+  await spec()
+    .get(`${baseUrl}/product/2/49`)
+    .withHeaders({ 'x-token': token })
+    .expectStatus(200)
+    .expectJsonMatch(
+      {
+        ret: 'ok',
+        product: {
+          pId: 49,
+          pgId: 2,
+          country: 'Italy-USA',
+          director: 'Leone, Sergio',
+          genre: 'Western',
+          price: 14.4,
+          title: 'Once Upon a Time in the West',
+          year: 1968,
+        },
+      },
+    );
+});
