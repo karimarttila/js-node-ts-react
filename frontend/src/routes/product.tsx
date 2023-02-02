@@ -36,6 +36,8 @@ export async function productLoader({ params }: { params: productParams }): Prom
 export function Product() {
   const product: ProductType = useLoaderData() as ProductType;
   const title = "Product";
+  // A bit of a hack to get the type of the product, but this is a demo.
+  const productType = product.pgId === 1 ? "book" : "movie";
 
   function ProductTable({
     product,
@@ -69,8 +71,8 @@ export function Product() {
                 <td>{product.price}</td>
                </tr>
                <tr>             
-                <td>{product.pgId === 1 ? 'Author' : 'Director'}</td>
-                <td>{product.authorOrDirector}</td>
+                <td>{productType === "book" ? 'Author' : 'Director'}</td>
+                <td>{productType === "book" ? product.author : product.director}</td>
                </tr>
                <tr>             
                 <td>Year</td>
@@ -81,8 +83,8 @@ export function Product() {
                 <td>{product.country}</td>
                </tr>
                <tr>             
-                <td>{product.pgId === 1 ? 'Language' : 'Genre'}</td>
-                <td>{product.languageOrGenre}</td>
+                <td>{productType === "book" ? 'Language' : 'Genre'}</td>
+                <td>{productType === "book" ? product.language : product.genre}</td>
                </tr>
             </tbody>
         </table>

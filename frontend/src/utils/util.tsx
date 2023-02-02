@@ -22,16 +22,29 @@ export interface ProductGroupsResponse {
   product_groups: ProductGroupType[];
 }
 
-export type ProductType = {
+export type BookType = {
   pgId: number;
   pId: number;
-  authorOrDirector: string;
+  author: string;
   country: string;
-  languageOrGenre: string;
+  language: string;
   price: number;
   title: string;
   year: number;
 };
+
+export type MovieType = {
+  pgId: number;
+  pId: number;
+  Director: string;
+  country: string;
+  Genre: string;
+  price: number;
+  title: string;
+  year: number;
+};
+
+export type ProductType = BookType | MovieType;
 
 export interface ProductsResponse {
   products: ProductType[];
