@@ -87,12 +87,11 @@ export default function ProductGroups() {
     if (!(loginState === "loggedIn" && token)) {
       navigate("/login");
     }
-  },[])
+  },[loginState, navigate, token])
 
   if (!(loginState === "loggedIn" && token)) {
     return null;
   }
-
 
   const productGroupsSWR = useSWR<ProductGroupsResponse>(
     productGroupsUrl,
