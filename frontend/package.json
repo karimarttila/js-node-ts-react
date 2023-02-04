@@ -10,10 +10,12 @@
     "prettify": "prettier --write ."
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
     "@tanstack/react-table": "^8.7.4",
     "axios": "^1.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",
     "swr": "^2.0.0"
   },

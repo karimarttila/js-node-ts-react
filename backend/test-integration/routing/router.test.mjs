@@ -2,7 +2,6 @@
 import pkg from 'pactum';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
-import { PutFunctionConcurrencyRequestFilterSensitiveLog } from '@aws-sdk/client-lambda';
 
 const { spec } = pkg;
 
@@ -24,15 +23,16 @@ it('Call /login', async () => {
     .post(`${baseUrl}/login`)
     .withHeaders({ 'Content-Type': 'application/json' })
     .withJson({
-      username: 'jarska',
+      username: 'jartsa',
       password: 'joo',
     })
     .expectStatus(200)
     .expectJsonLike({ ret: 'ok' });
 });
 
+// eslint-disable-next-line no-undef
 it('Call /product-groups', async () => {
-  const res = await axios.post(`${baseUrl}/login`, { username: 'jarska', password: 'joo' });
+  const res = await axios.post(`${baseUrl}/login`, { username: 'jartsa', password: 'joo' });
   const { token } = res.data;
   await spec()
     .get(`${baseUrl}/product-groups`)
@@ -41,16 +41,16 @@ it('Call /product-groups', async () => {
     .expectJsonMatch({ ret: 'ok', product_groups: [{ pgId: 1, name: 'Books' }, { pgId: 2, name: 'Movies' }] });
 });
 
+// eslint-disable-next-line no-undef
 it('Call /product-groups, token missing', async () => {
-  const res = await axios.post(`${baseUrl}/login`, { username: 'jarska', password: 'joo' });
-  const { token } = res.data;
   await spec()
     .get(`${baseUrl}/product-groups`)
     .expectStatus(404);
 });
 
+// eslint-disable-next-line no-undef
 it('Call /products/1', async () => {
-  const res = await axios.post(`${baseUrl}/login`, { username: 'jarska', password: 'joo' });
+  const res = await axios.post(`${baseUrl}/login`, { username: 'jartsa', password: 'joo' });
   const { token } = res.data;
   await spec()
     .get(`${baseUrl}/products/1`)
@@ -69,8 +69,9 @@ it('Call /products/1', async () => {
     });
 });
 
+// eslint-disable-next-line no-undef
 it('Call /product/2/49', async () => {
-  const res = await axios.post(`${baseUrl}/login`, { username: 'jarska', password: 'joo' });
+  const res = await axios.post(`${baseUrl}/login`, { username: 'jartsa', password: 'joo' });
   const { token } = res.data;
   await spec()
     .get(`${baseUrl}/product/2/49`)

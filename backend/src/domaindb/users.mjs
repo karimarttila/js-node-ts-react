@@ -6,7 +6,7 @@ const EXPRIRES_IN = 1800;
 
 // Simulate user database.
 const userDb = [
-  { username: 'jarska', password: 'joo' },
+  { username: 'jartsa', password: 'joo' },
   { username: 'rane', password: 'jee' },
   { username: 'd', password: 'd' },
 ];

@@ -2,8 +2,6 @@
 import { expect, test } from 'vitest';
 import { getProductGroups, getProducts, getProduct } from '../../src/domaindb/domain.mjs';
 
-import { ValidationError } from '../../src/util/errors.mjs';
-
 test('Get product groups ok', async () => {
   const productGroups = await getProductGroups();
   expect(productGroups).be.an('array');

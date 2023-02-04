@@ -1,5 +1,7 @@
 import axios from "axios";
 
+// TODO: Muuta tämä pääte: .tsx -> .ts
+
 export const hostName = "localhost";
 export const port = "6600";
 export const productGroupsUrl = `http://${hostName}:${port}/product-groups`;
