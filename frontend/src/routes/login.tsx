@@ -1,15 +1,12 @@
 import React from "react";
 import Header from "../header";
-//import { loginReducer } from "../utils/state";
 import type { RootState } from "../utils/store";
 import { useSelector, useDispatch } from "react-redux";
-//import { decrement, increment } from '../utils/state-reducers';
-import { login, logout } from "../utils/login-reducer";
+import { login, logout, selectLoginStatus } from "../utils/login-reducer";
 
 export default function Login() {
   const title = "Login";
-  const loginState = useSelector((state: RootState) => state.loginState);
-  const dispatch = useDispatch();
+  const loginState = selectLoginStatus(useSelector((state: RootState) => state));
 
   return (
     <div>

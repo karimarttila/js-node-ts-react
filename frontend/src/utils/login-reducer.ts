@@ -1,5 +1,6 @@
  import { createSlice } from '@reduxjs/toolkit'
  import type { PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from './store';
 
 // See: https:redux.js.org/tutorials/essentials/part-1-overview-concepts
 // See: https://redux-toolkit.js.org/tutorials/quick-start
@@ -34,6 +35,10 @@ export const loginSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { login, logout } = loginSlice.actions;
+export const selectUser = (state: RootState) => state.loginState.username;
+export const selectLoginStatus = (state: RootState) => state.loginState.status;
+export const selectToken = (state: RootState) => state.loginState.token;
+
 
 export default loginSlice.reducer
 

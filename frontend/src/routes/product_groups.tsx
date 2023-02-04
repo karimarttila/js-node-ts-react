@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../header";
+import { useNavigate } from "react-router-dom";
 import { productGroupsUrl, fetchJSON, ProductGroupType, ProductGroupsResponse } from "../utils/util";
 import useSWR from "swr";
 import {
@@ -8,6 +9,9 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { selectLoginStatus, selectToken } from "../utils/login-reducer";
+import { useSelector } from "react-redux/es/exports";
+import { RootState } from "../utils/store";
 
 const pgColumnHelper = createColumnHelper<ProductGroupType>();
 
@@ -75,10 +79,26 @@ function ProductGroupsTable({
 }
 
 export default function ProductGroups() {
+  const loginState = selectLoginStatus(useSelector((state: RootState) => state));
+  const token = selectToken(useSelector((state: RootState) => state));
+  const navigate = useNavigate();  
+
+  useEffect(() => {
+    if (!(loginState === "loggedIn" && token)) {
+      navigate("/login");
+    }
+  },[])
+
+  if (!(loginState === "loggedIn" && token)) {
+    return null;
+  }
+
+
   const productGroupsSWR = useSWR<ProductGroupsResponse>(
     productGroupsUrl,
     fetchJSON,
   );
+
   const productGroups = productGroupsSWR.data?.product_groups;
   const title = "Product Groups";
 
@@ -96,3 +116,4 @@ export default function ProductGroups() {
     </div>
   );
 }
+
