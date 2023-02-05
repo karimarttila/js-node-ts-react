@@ -20,7 +20,7 @@ export async function fetchJSON(params: { url: string, method?: string, data?: a
     headers,
   });
   if (response.status === 200 && response.data.ret === "ok") {
-    console.log(`response.data: ${JSON.stringify(response.data)}`);
+    //console.log(`response.data: ${JSON.stringify(response.data)}`);
     return response.data;
   }
   throw new Error(response.data.msg);

@@ -5,8 +5,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { login, logout, selectLoginStatus } from "../utils/login-reducer";
 import { ErrorMessage, LoginResponse, loginUrl, fetchJSON } from "../utils/util";
 
-  
-
 export default function Login() {
 
   const title = "You need to login to use the web store";
@@ -27,16 +25,16 @@ export default function Login() {
           method: 'post',
           data: {username, password}},
         );
-        console.log(`response: ${JSON.stringify(response)}`);
         setError(null);
       }
       catch (error) {
+        // NOTE: In real application we should validate if the error is due to wrong username or password,
+        // or if the server is down, etc.
         setError({title: "Login failed!", msg: 'Username or password is wrong.'});
       }
     },
     [],
   );
-
 
   return (
     <>
@@ -44,7 +42,6 @@ export default function Login() {
       <div className="p-4">
         <p className="text-left text-lg font-bold p-4">{title}</p>
       </div>      
-      {console.log(`error: ${JSON.stringify(error)}`)}
       {error &&  
       <div className="flex grow w-3/4 p-4">
         <ErrorMessage title={error.title} msg={error.msg}/>
@@ -88,7 +85,6 @@ export default function Login() {
           </form>
         </div>
       </div>
-
     </>
   );
 }
