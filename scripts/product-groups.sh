@@ -1,6 +1,6 @@
 #!/bin/bash
 
-RET=$(http POST http://localhost:6600/login username=jarska password=joo Content-Type:application/json)
+RET=$(http POST http://localhost:6600/login username=jartsa password=joo Content-Type:application/json)
 TOKEN=$(echo $RET | jq '.token' | tr -d '"') 
 #echo $TOKEN
 

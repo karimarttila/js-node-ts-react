@@ -93,6 +93,7 @@ export default function ProductGroups() {
     return null;
   }
 
+  // TODO: wrap with useEffect ?
   const productGroupsSWR = useSWR<ProductGroupsResponse>(
     productGroupsUrl,
     fetchJSON,
