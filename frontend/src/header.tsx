@@ -1,20 +1,33 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { selectLoginStatus, selectUser } from "./utils/login-reducer";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout, selectLoginStatus, selectUser } from "./utils/login-reducer";
 import { RootState } from "./utils/store";
 
 const Header = function () {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+
   const loginState = selectLoginStatus(
     useSelector((state: RootState) => state),
   );
   const user = selectUser(useSelector((state: RootState) => state));
+
+  const handleLogout = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
+
 
   return (
     <div className="flex grow bg-gray-200 p-4">
       <div className="flex flex-col grow">
         <div className="flex justify-end">
           {loginState === "loggedIn" && user && (
-            <h1 className="flex justify-right text text-center">{user}</h1>
+            <div className="flex justify-right gap-2">
+              <p className="">{user}</p>
+              <a href="#" onClick={handleLogout} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Logout</a>
+            </div>
           )}
         </div>
         <div className="flex justify-center">

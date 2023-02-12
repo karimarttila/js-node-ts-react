@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import Header from "../header";
 import { NavLink, useNavigate } from "react-router-dom";
-import { productGroupsUrl, fetchJSON, ProductGroupType, ProductGroupsResponse } from "../utils/util";
+import {
+  productGroupsUrl,
+  ProductGroupType,
+  ProductGroupsResponse,
+  fetchJSONWithToken,
+} from "../utils/util";
 import useSWR from "swr";
 import {
   createColumnHelper,
@@ -19,9 +24,7 @@ const columns = [
   pgColumnHelper.accessor("pgId", {
     header: "Id",
     cell: (info) => (
-      <NavLink to={`/products/` + info.getValue()}>
-        {info.getValue()}
-    </NavLink>
+      <NavLink to={`/products/` + info.getValue()}>{info.getValue()}</NavLink>
     ),
   }),
   pgColumnHelper.accessor("name", {
@@ -81,22 +84,27 @@ function ProductGroupsTable({
 }
 
 export default function ProductGroups() {
-  const loginState = selectLoginStatus(useSelector((state: RootState) => state));
+  const loginState = selectLoginStatus(
+    useSelector((state: RootState) => state),
+  );
   const token = selectToken(useSelector((state: RootState) => state));
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
+
+  const productGroupsSWR = useSWR<ProductGroupsResponse>(
+    [productGroupsUrl, "get", null, token],
+    ([url, method, data, token]) =>
+      fetchJSONWithToken({ url, method, data, token }),
+  );
 
   useEffect(() => {
     if (!(loginState === "loggedIn" && token)) {
       navigate("/login");
     }
-  },[loginState, navigate, token])
+  }, [loginState, navigate, token]);
 
   if (!(loginState === "loggedIn" && token)) {
     return null;
   }
-
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const productGroupsSWR = useSWR<ProductGroupsResponse>([productGroupsUrl, 'get', null, token], ([url, method, data, token]) => fetchJSON({url, method, data, token}));
 
   const productGroups = productGroupsSWR.data?.product_groups;
   const title = "Product Groups";
@@ -115,4 +123,3 @@ export default function ProductGroups() {
     </div>
   );
 }
-

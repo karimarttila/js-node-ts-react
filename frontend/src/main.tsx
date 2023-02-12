@@ -7,8 +7,8 @@ import Products from "./routes/products";
 import { Product, productLoader } from "./routes/product";
 import "./index.css";
 import Login from "./routes/login";
-import { store } from './utils/store';
-import { Provider } from 'react-redux';
+import { store } from "./utils/store";
+import { Provider } from "react-redux";
 
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement!); // eslint-disable-line
