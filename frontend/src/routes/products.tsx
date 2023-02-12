@@ -1,7 +1,8 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import Header from "../header";
 import { productGroupsUrl, productsUrl, fetchJSON, ProductType, ProductGroupsResponse, ProductsResponse } from "../utils/util";
+import { selectLoginStatus, selectToken } from "../utils/login-reducer";
 import useSWR from "swr";
 import {
   createColumnHelper,
@@ -10,7 +11,8 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../utils/store";
 
 const pColumnHelper = createColumnHelper<ProductType>();
 
@@ -18,7 +20,9 @@ const columns = [
   pColumnHelper.accessor("pId", {
     header: "Id",
     cell: (info) => (
-      <a href={"/product/" + info.row.original.pgId + "/" + info.getValue()}> {info.getValue()} </a>
+      <NavLink to={"/product/" + info.row.original.pgId + "/" + info.getValue()}>
+        {info.getValue()}
+    </NavLink>
     ),
   }),
   pColumnHelper.accessor("title", {
@@ -131,13 +135,31 @@ function ProductsTable({
 
 export default function Products() {
   const { pgId } = useParams();
+  const loginState = selectLoginStatus(useSelector((state: RootState) => state));
+  const token = selectToken(useSelector((state: RootState) => state));
+  const navigate = useNavigate();
+
+  console.log(`loginState: ${loginState}, token: ${token}`);
+
+  useEffect(() => {
+    if (!(loginState === "loggedIn" && token)) {
+      navigate("/login");
+    }
+  },[loginState, navigate, token])
+
+  if (!(loginState === "loggedIn" && token)) {
+    return null;
+  }
+
   const pgIdNum = parseInt(pgId || "-1");
-  const productGroupsSWR = useSWR<ProductGroupsResponse>(productGroupsUrl, fetchJSON);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const productGroupsSWR = useSWR<ProductGroupsResponse>([productGroupsUrl, 'get', null, token], ([url, method, data, token]) => fetchJSON({url, method, data, token}));  
   const productGroups = productGroupsSWR.data?.product_groups;
   const pgName = productGroups?.find((pg) => pg.pgId === pgIdNum)?.name ||"";
   const title = "Products - " + pgName;
   const productsUrlWithPgId = productsUrl + `/${pgId}`;
-  const productsSWR = useSWR<ProductsResponse>(productsUrlWithPgId, fetchJSON);
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const productsSWR = useSWR<ProductsResponse>([productsUrlWithPgId, 'get', null, token], ([url, method, data, token]) => fetchJSON({url, method, data, token}));
   const products = productsSWR.data?.products;
 
   return (

@@ -1,96 +1,94 @@
-import React from "react";
-import axios from "axios";
-import { useLoaderData } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useLoaderData, useParams } from "react-router-dom";
 import Header from "../header";
-import { productUrl, ProductType} from "../utils/util";
+import { productUrl, ProductType, fetchJSON, ProductResponse} from "../utils/util";
+import { selectLoginStatus, selectToken } from "../utils/login-reducer";
+import { RootState } from "../utils/store";
+import { useSelector } from "react-redux";
+import useSWR from "swr";
 
+// NOTE: Removed react-router loader pattern later when added token functionality.
+// See previous commits for the original code.
 
-// Using react-router loader pattern to compare with products.tsx.
+function ProductTable({
+  product,
+  productType,
+}: {
+  product: ProductType;
+  productType: string;
+}) {
+  return (
+    <div className="p-4">
+      <table>
+        <thead className="font-bold">
+          <tr>
+            <td>Field</td>
+            <td>Value</td>
+          </tr> 
+          </thead>
+          <tbody>
+            <tr>             
+              <td>pgId</td>
+              <td>{product.pgId}</td>
+             </tr>
+             <tr>             
+              <td>pId</td>
+              <td>{product.pId}</td>
+             </tr>
+             <tr>             
+              <td>Title</td>
+              <td>{product.title}</td>
+             </tr>
+             <tr>             
+              <td>Price</td>
+              <td>{product.price}</td>
+             </tr>
+             <tr>             
+              <td>{productType === "book" ? 'Author' : 'Director'}</td>
+              <td>{productType === "book" ? product.author : product.director}</td>
+             </tr>
+             <tr>             
+              <td>Year</td>
+              <td>{product.year}</td>
+             </tr>
+             <tr>             
+              <td>Country</td>
+              <td>{product.country}</td>
+             </tr>
+             <tr>             
+              <td>{productType === "book" ? 'Language' : 'Genre'}</td>
+              <td>{productType === "book" ? product.language : product.genre}</td>
+             </tr>
+          </tbody>
+      </table>
+    </div>
+  );
+}  
 
-type productParams = {
-  pgId: string, 
-  pId: string
-}
-
-export async function productLoader({ params }: { params: productParams }): Promise<ProductType> {
-  const { pgId, pId } = params;
-  const productUrlWithIds = productUrl + `/${pgId}` + `/${pId}`;
-  const product: ProductType = await axios
-  .get(productUrlWithIds)
-  .then((response) => {
-    if (response.status === 200 && response.data.ret === "ok")
-      return response.data.product;
-  })
-  .catch((error) => {
-    console.log("error", error);
-  });
-  if (!product) {
-    throw new Response("", {
-      status: 404,
-      statusText: "Not Found",
-    });
-  }
-  return product;  
-}
 
 export function Product() {
-  const product: ProductType = useLoaderData() as ProductType;
+  const { pgId, pId } = useParams();
   const title = "Product";
-  // A bit of a hack to get the type of the product, but this is a demo.
-  const productType = product.pgId === 1 ? "book" : "movie";
+  const loginState = selectLoginStatus(useSelector((state: RootState) => state));
+  const token = selectToken(useSelector((state: RootState) => state));
+  const navigate = useNavigate();  
 
-  function ProductTable({
-    product,
-  }: {
-    product: ProductType;
-  }) {
-    return (
-      <div className="p-4">
-        <table>
-          <thead className="font-bold">
-            <tr>
-              <td>Field</td>
-              <td>Value</td>
-            </tr> 
-            </thead>
-            <tbody>
-              <tr>             
-                <td>pgId</td>
-                <td>{product.pgId}</td>
-               </tr>
-               <tr>             
-                <td>pId</td>
-                <td>{product.pId}</td>
-               </tr>
-               <tr>             
-                <td>Title</td>
-                <td>{product.title}</td>
-               </tr>
-               <tr>             
-                <td>Price</td>
-                <td>{product.price}</td>
-               </tr>
-               <tr>             
-                <td>{productType === "book" ? 'Author' : 'Director'}</td>
-                <td>{productType === "book" ? product.author : product.director}</td>
-               </tr>
-               <tr>             
-                <td>Year</td>
-                <td>{product.year}</td>
-               </tr>
-               <tr>             
-                <td>Country</td>
-                <td>{product.country}</td>
-               </tr>
-               <tr>             
-                <td>{productType === "book" ? 'Language' : 'Genre'}</td>
-                <td>{productType === "book" ? product.language : product.genre}</td>
-               </tr>
-            </tbody>
-        </table>
-      </div>
-    );
-  }  
+  useEffect(() => {
+    if (!(loginState === "loggedIn" && token)) {
+      navigate("/login");
+    }
+  },[loginState, navigate, token])
+
+  if (!(loginState === "loggedIn" && token)) {
+    return null;
+  }
+
+  const productUrlWithParams = `${productUrl}/${pgId}/${pId}`;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const productSWR = useSWR<ProductResponse>([productUrlWithParams, 'get', null, token], ([url, method, data, token]) => fetchJSON({url, method, data, token}));  
+  const product = productSWR.data?.product;
+  // A bit of a hack to get the type of the product, but this is a demo.
+  const productType = product?.pgId === 1 ? "book" : "movie";  
 
   return (
     <div>
@@ -102,7 +100,7 @@ export function Product() {
 
         <div className="p-4">
           {product && (
-            <ProductTable product={product} />
+            <ProductTable product={product} productType={productType} />
           )}
 
         </div>

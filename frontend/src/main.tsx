@@ -33,7 +33,6 @@ const router = createBrowserRouter([
   {
     path: "product/:pgId/:pId",
     element: <Product />,
-    loader: productLoader,
   },
 ]);
 

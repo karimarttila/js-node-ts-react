@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Header from "../header";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { productGroupsUrl, fetchJSON, ProductGroupType, ProductGroupsResponse } from "../utils/util";
 import useSWR from "swr";
 import {
@@ -19,7 +19,9 @@ const columns = [
   pgColumnHelper.accessor("pgId", {
     header: "Id",
     cell: (info) => (
-      <a href={"/products/" + info.getValue()}> {info.getValue()} </a>
+      <NavLink to={`/products/` + info.getValue()}>
+        {info.getValue()}
+    </NavLink>
     ),
   }),
   pgColumnHelper.accessor("name", {
@@ -93,11 +95,8 @@ export default function ProductGroups() {
     return null;
   }
 
-  // TODO: wrap with useEffect ?
-  const productGroupsSWR = useSWR<ProductGroupsResponse>(
-    productGroupsUrl,
-    fetchJSON,
-  );
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const productGroupsSWR = useSWR<ProductGroupsResponse>([productGroupsUrl, 'get', null, token], ([url, method, data, token]) => fetchJSON({url, method, data, token}));
 
   const productGroups = productGroupsSWR.data?.product_groups;
   const title = "Product Groups";

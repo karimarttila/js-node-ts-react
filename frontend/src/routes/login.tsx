@@ -4,13 +4,16 @@ import type { RootState } from "../utils/store";
 import { useSelector, useDispatch } from "react-redux";
 import { login, logout, selectLoginStatus } from "../utils/login-reducer";
 import { ErrorMessage, LoginResponse, loginUrl, fetchJSON } from "../utils/util";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-
   const title = "You need to login to use the web store";
   const loginState = selectLoginStatus(
     useSelector((state: RootState) => state),
   );
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const [error, setError] = useState<{title: string, msg: string} | null>(null);
 
@@ -26,6 +29,16 @@ export default function Login() {
           data: {username, password}},
         );
         setError(null);
+        if (response.ret === "ok" && response.token) {
+          dispatch(login({
+            token: response.token,
+            username: username,
+          }));
+          navigate('/product-groups');
+        }
+        else {
+          setError({title: "Login failed!", msg: 'Bad response.'});
+        }        
       }
       catch (error) {
         // NOTE: In real application we should validate if the error is due to wrong username or password,
@@ -33,7 +46,7 @@ export default function Login() {
         setError({title: "Login failed!", msg: 'Username or password is wrong.'});
       }
     },
-    [],
+    [navigate],
   );
 
   return (

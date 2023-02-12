@@ -8,7 +8,7 @@ import { RootState } from './store';
 
 export interface LoginState {
   username?: string | undefined;
-  status: 'loggedOut' | 'loggedIn';
+  status?: string | undefined; 
   token?: string | undefined;
 }
 
@@ -23,7 +23,7 @@ export const loginSlice = createSlice({
     login: (state, action: PayloadAction<LoginState>) => {
       state.username = action.payload.username;
       state.token = action.payload.token;
-      state.status = action.payload.status;
+      state.status = 'loggedIn';
     },
     logout: (state) => {
       state.username = undefined;
