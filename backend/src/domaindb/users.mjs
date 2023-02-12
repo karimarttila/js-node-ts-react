@@ -5,6 +5,8 @@ import { ValidationError } from '../util/errors.mjs';
 const EXPRIRES_IN = 1800;
 
 // Simulate user database.
+// NOTE: Session database is in memory, so it won't work with serverless:
+// You should persist sessions to database.
 const userDb = [
   { username: 'jartsa', password: 'joo' },
   { username: 'rane', password: 'jee' },
@@ -74,6 +76,7 @@ function validateToken(token) {
   const decodedToken = jwt.verify(token, SECRET);
   const session = findSessionByToken(token);
   if (!session) {
+    const sessions = giveSessions();
     throw new ValidationError('Token not found in the session database');
   }
   if (!decodedToken) {

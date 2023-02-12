@@ -4,7 +4,8 @@
   "description": "js-node-ts-react app - backend",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec serverless offline start",
+    "dev": "nodemon --exec node app.mjs",
+    "serverless-dev": "nodemon --exec serverless offline start",
     "format": "eslint . --fix",
     "lint": "eslint .",
     "test": "NODE_ENV=test vitest",
@@ -15,6 +16,7 @@
     "@serverless/utils": "^6.8.2",
     "aws-sdk-mock": "^5.8.0",
     "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "joi": "^17.7.0",

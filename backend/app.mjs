@@ -1,11 +1,20 @@
 import express from 'express';
+import cors from 'cors';
 import router from './src/routing/router.mjs';
 import { errorHandler } from './src/util/middleware.mjs';
 
-const application = express();
+const corsOptions = {
+  origin: 'http://localhost:6610',
+};
 
-application.use(router);
-// Error handler middleware.
-application.use(errorHandler);
+const port = 6600;
+const app = express();
+app.use(cors(corsOptions));
+app.use(router);
+app.use(errorHandler);
 
-export default application;
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+
+export default app;
