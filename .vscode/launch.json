@@ -11,7 +11,7 @@
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/backend/src/domaindb/domain.mjs"
+      "program": "${workspaceFolder}/backend/src/db/domain.mjs"
     }
   ]
 }

@@ -76,7 +76,6 @@ function validateToken(token) {
   const decodedToken = jwt.verify(token, SECRET);
   const session = findSessionByToken(token);
   if (!session) {
-    const sessions = giveSessions();
     throw new ValidationError('Token not found in the session database');
   }
   if (!decodedToken) {

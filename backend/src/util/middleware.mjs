@@ -1,7 +1,7 @@
 import logger from './logger.mjs';
 import { production } from './config.mjs';
 import { NotFoundError } from './errors.mjs';
-import { validateToken } from '../domaindb/users.mjs';
+import { validateToken } from '../db/users.mjs';
 
 // ErrorHandler.js
 // eslint-disable-next-line no-unused-vars

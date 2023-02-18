@@ -10,6 +10,18 @@ Thanks to [Thomas De Bluts](https://www.linkedin.com/in/thomas-de-bluts-296a7413
 
 Also thanks to all of those in [Koodiklinikka Slack](https://koodiklinikka.fi/), in channels `#javascript`, `#typescript` and `#react` for all the wonderful help and support! Especially I'd like to name [Aarni Koskela](https://github.com/akx), [Pete Nykänen](https://github.com/petetnt), [Jussi Kinnula]( https://github.com/jussikinnula), [Juha Pekkarinen](https://github.com/sirjuan), [Toni Parviainen](https://www.linkedin.com/in/toniparviainen/), and [Kalle Ranki](https://www.linkedin.com/in/kalle-ranki/) - I got their permission to mention their names in the Koodiklinikka slack. If you are a Finnish developer, I really recommend using the excellent Koodiklinikka Slack if you want to learn new programming languages or technologies - there are a lot of competent experts in the Koodiklinikka Slack willing to help each other.
 
+## Related Blog Posts
+
+I wrote four blog posts related to this exercise:
+
+- [Javascript and Node Impressions](https://www.karimarttila.fi/javascript/2022/12/24/javascript-node-impressions.html)
+- [Typescript and React Impressions](https://www.karimarttila.fi/typescript/2022/12/30/typescript-react-impressions.html)
+- [Javascript Backend Testing
+](https://www.karimarttila.fi/javascript/2023/02/03/javascript-backend-testing.html)
+- [React State Management](https://www.karimarttila.fi/react/2023/02/13/react-state-management.html)
+
+There is also an equivalent implementation using Clojure. You might find it interesting to compare these two solutions: TODO.
+
 ## Quick Installation Guide
 
 Just use `pnpm install` and `pnpm dev` both in the backend and frontend sides.
@@ -79,7 +91,7 @@ You can use VSCode debugger with this `launch.json` configuration:
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/backend/src/domaindb/domain.mjs"
+      "program": "${workspaceFolder}/backend/src/db/domain.mjs"
     }
   ]
 }
@@ -98,7 +110,7 @@ Then in VSCode:
 Use `Run and Debug` (VSCode: left panel).
 Then `Run Javascript debug terminal` (VSCode upper left corner).
 Set a breakpoint in `domain.jms` file.
-Open terminal, `cd backend` and run e.g. `node src/domaindb/domain.mjs` => debugger stops in the breakpoint.
+Open terminal, `cd backend` and run e.g. `node src/db/domain.mjs` => debugger stops in the breakpoint.
 
 This way you can debug an individual file using the VSCode debugger.
 
@@ -217,6 +229,8 @@ Since I use React, using [React Router](https://reactrouter.com/en/main) as a fr
 Before implementing the routing for this demo application, I did the excellent [React Routing Tutorial](https://reactrouter.com/en/main/start/tutorial). After implementing the demo application I realized that most of the stuff in that tutorial is not needed in a simple frontend application like in the demo app I implemented. More about that in the next chapter.
 
 ### Comparing SWR React Hook and React-router Loader Pattern
+
+NOTE: I, later on, changed the loading data pattern (Product page) to use the SRW hook method, as well.
 
 React-router provides API for fetching the data needed in the React component, see [Loading Data](https://reactrouter.com/en/main/start/tutorial#loading-data) chapter in the tutorial. This is an IoC (inverse of control, a.k.a. Hollywood principle): you provide a function for fetching the data and provide the function when configuring the router. Then the React component can get the loader using `import { useLoaderData } from "react-router-dom";` API.
 

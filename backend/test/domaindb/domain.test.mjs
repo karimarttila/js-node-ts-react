@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { expect, test } from 'vitest';
-import { getProductGroups, getProducts, getProduct } from '../../src/domaindb/domain.mjs';
+import { getProductGroups, getProducts, getProduct } from '../../src/db/domain.mjs';
 
 test('Get product groups ok', async () => {
   const productGroups = await getProductGroups();

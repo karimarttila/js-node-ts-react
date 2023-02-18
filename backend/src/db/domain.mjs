@@ -147,7 +147,7 @@ async function getProduct(pgId, pId) {
 }
 
 // For debugging using the node Run and Debug REPL.
-// Open terminal in the backend directory and run: node src/domaindb/domain.mjs
+// Open terminal in the backend directory and run: node src/db/domain.mjs
 // const debugRet = await getProductGroups();
 // logger.debug('debugRet: ', debugRet);
 // await loadProducts(1);

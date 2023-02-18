@@ -1,8 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { getProductGroups, getProducts, getProduct } from '../domaindb/domain.mjs';
+import { getProductGroups, getProducts, getProduct } from '../db/domain.mjs';
 import { NotFoundError } from '../util/errors.mjs';
-import { validateUser } from '../domaindb/users.mjs';
+import { validateUser } from '../db/users.mjs';
 import { verifyToken } from '../util/middleware.mjs';
 
 const router = express.Router();

@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Index from "./routes/index";
 import ProductGroups from "./routes/product_groups";
 import Products from "./routes/products";
-import { Product, productLoader } from "./routes/product";
+import { Product } from "./routes/product";
 import "./index.css";
 import Login from "./routes/login";
 import { store } from "./utils/store";

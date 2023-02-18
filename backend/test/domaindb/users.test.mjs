@@ -2,7 +2,7 @@
 import { expect, test } from 'vitest';
 import {
   validateUser, giveSessions, clearSessions, findSessionByToken, validateToken,
-} from '../../src/domaindb/users.mjs';
+} from '../../src/db/users.mjs';
 import { ValidationError } from '../../src/util/errors.mjs';
 
 test('Validate users ok', () => {
