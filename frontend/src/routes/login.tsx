@@ -85,7 +85,7 @@ export default function Login() {
                 </div>
               </div>
               <div className="flex flex-wrap gap-2 items-center mt-1">
-                <label htmlFor="pasword" className="login-label">
+                <label htmlFor="password" className="login-label">
                   Password
                 </label>
                 <div className="">

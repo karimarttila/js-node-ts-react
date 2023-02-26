@@ -3,6 +3,10 @@ import cors from 'cors';
 import router from './src/routing/router.mjs';
 import { errorHandler } from './src/util/middleware.mjs';
 
+// Note:
+// backend port: 6600
+// frontend port: 6610
+
 const corsOptions = {
   origin: 'http://localhost:6610',
 };

@@ -20,7 +20,7 @@ I wrote four blog posts related to this exercise:
 ](https://www.karimarttila.fi/javascript/2023/02/03/javascript-backend-testing.html)
 - [React State Management](https://www.karimarttila.fi/react/2023/02/13/react-state-management.html)
 
-There is also an equivalent implementation using Clojure. You might find it interesting to compare these two solutions: TODO.
+There is also an equivalent implementation using Clojure. You might find it interesting to compare these two solutions: [clojure-full-stack-demo](https://github.com/karimarttila/clojure-full-stack-demo).
 
 ## Quick Installation Guide
 
