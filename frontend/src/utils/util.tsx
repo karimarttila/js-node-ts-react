@@ -1,8 +1,6 @@
 import axios from "axios";
 import React from "react";
 
-// TODO: Muuta tämä pääte: .tsx -> .ts
-
 export const hostName = "localhost";
 export const port = "6600";
 export const loginUrl = `http://${hostName}:${port}/login`;
