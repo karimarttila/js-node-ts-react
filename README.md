@@ -70,10 +70,16 @@ So, we simulate a webstore: you can query product groups, get a listing of produ
 
 ### Nodemon
 
-You can keep your serverless backend up and running with [nodemon](https://nodemon.io/):
+You can keep your serverless backend up and running with [nodemon](https://nodemon.io/), see See in [package.json](backend/package.json):
 
 ```json
-"dev": "nodemon --exec serverless offline start",
+"dev": "nodemon --exec node app.mjs",
+```
+
+I.e. run:
+
+```bash
+pnpm dev
 ```
 
 ### VSCode Debugger
@@ -214,6 +220,20 @@ I used [akx/vite-react-ts-template](https://github.com/akx/vite-react-ts-templat
 
 ```bash
 npx degit akx/vite-react-ts-template
+```
+
+### Start Development Server
+
+See in [package.json](frontend/package.json):
+
+```json
+"dev": "vite --port 6610"
+```
+
+I.e., run:
+
+```bash
+pnpm dev
 ```
 
 ### React
